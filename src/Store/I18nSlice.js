@@ -33,7 +33,7 @@ export const FetchRegions = createAsyncThunk("i18n/fetchRegions", async () => {
     });
     return response.data;
   } catch (error) {
-    return error.response?.data || error.message;
+    return error.response?.data?.error?.message;
   }
 });
 
