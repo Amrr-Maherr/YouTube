@@ -45,7 +45,7 @@ export default function NavDrawer() {
   return (
     <Sheet>
       <SheetTrigger>
-        <div className="w-[40px] h-[40px] rounded-full flex items-center justify-center cursor-pointer hover:bg-[#272727]">
+        <div className="w-[40px] h-[40px] rounded-full flex items-center justify-center cursor-pointer hover:bg-[var(--background)]">
           <Menu className="text-[var(--foreground)] w-[24px] h-[24px]" />
         </div>
       </SheetTrigger>
@@ -67,7 +67,7 @@ export default function NavDrawer() {
               <Link
                 key={index}
                 href={item.href}
-                className="flex items-center gap-6 px-4 py-2 rounded-lg hover:bg-[#272727] text-sm"
+                className="flex items-center gap-6 px-4 py-2 rounded-lg hover:bg-[var(--background)] text-sm"
               >
                 <Icon size={22} />
                 <span>{item.label}</span>
@@ -85,7 +85,7 @@ export default function NavDrawer() {
               <Link
                 key={index}
                 href={item.href}
-                className="flex items-center gap-6 px-4 py-2 rounded-lg hover:bg-[#272727] text-sm"
+                className="flex items-center gap-6 px-4 py-2 rounded-lg hover:bg-[var(--background)] text-sm"
               >
                 <Icon size={22} />
                 <span>{item.label}</span>
@@ -103,7 +103,7 @@ export default function NavDrawer() {
               <Link
                 key={index}
                 href={item.href}
-                className="flex items-center gap-6 px-4 py-2 rounded-lg hover:bg-[#272727] text-sm"
+                className="flex items-center gap-6 px-4 py-2 rounded-lg hover:bg-[var(--background)] text-sm"
               >
                 <Icon size={22} />
                 <span>{item.label}</span>
@@ -117,7 +117,7 @@ export default function NavDrawer() {
         <nav className="flex flex-col">
           <Link
             href="/Settings"
-            className="flex items-center gap-6 px-4 py-2 rounded-lg hover:bg-[#272727] text-sm"
+            className="flex items-center gap-6 px-4 py-2 rounded-lg hover:bg-[var(--background)] text-sm"
           >
             <Settings size={22} />
             <span>Settings</span>

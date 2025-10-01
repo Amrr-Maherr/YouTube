@@ -11,7 +11,7 @@ const UserActions = () => {
     <div className=" hidden md:flex items-center gap-5">
       <Tooltip>
         <TooltipTrigger>
-          <div className="w-[78px] h-[36px] rounded-full bg-[#272727] flex items-center justify-center gap-2">
+          <div className="w-[78px] h-[36px] rounded-full bg-[var(--background)] flex items-center justify-center gap-2">
             <p className="text-[14px] text-[var(--foreground)]">Add</p>
             <Plus className="text-[var(--foreground)]" strokeWidth={1} />
           </div>
@@ -20,7 +20,7 @@ const UserActions = () => {
       </Tooltip>
       <Tooltip>
         <TooltipTrigger>
-          <div className="w-[40px] h-[40px] rounded-full flex items-center justify-center cursor-pointer hover:bg-[#272727]">
+          <div className="w-[40px] h-[40px] rounded-full flex items-center justify-center cursor-pointer hover:bg-[var(--background)]">
             <Bell
               size={24}
               strokeWidth={1}
