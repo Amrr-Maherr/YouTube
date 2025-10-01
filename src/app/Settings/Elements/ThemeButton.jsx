@@ -4,13 +4,21 @@ import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 function ThemeButton() {
   const { setTheme } = useTheme();
-  const [Mode, setMode] = useState(false);
+  const [Mode, setMode] = useState();
+  // Fixed useEffect for initial theme load (run only on mount)
   useEffect(() => {
-    setTheme(Mode ? "light" : "dark");
-  }, [Mode]);
-  
-  console.log(Mode);
-  
+    const themeCode = localStorage.getItem("theme");
+    const isLight = themeCode === "light";
+    setMode(isLight);
+    setTheme(isLight ? "light" : "dark");
+  }, []); // Empty dependency: run once on mount
+
+  // Separate useEffect for updates when Mode changes (save to localStorage)
+  useEffect(() => {
+    const newTheme = Mode ? "light" : "dark";
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme);
+  }, [Mode, setTheme]); // Depend on Mode to update on toggle
   return (
     <Switch
       checked={Mode ? true : false}
