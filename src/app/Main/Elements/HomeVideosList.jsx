@@ -12,8 +12,9 @@ function HomeVideosList() {
   useEffect(() => {
     dispatch(FetchMostPopularVideos());
   }, [dispatch]);
+  console.log(Videos);
   return (
-    <section className="container py-2">
+    <section className="container py-2 mx-auto">
       {loading ? (
         <VideoSkeletonList />
       ) : (
