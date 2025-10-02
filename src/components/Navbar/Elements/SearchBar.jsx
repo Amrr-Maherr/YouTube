@@ -45,7 +45,7 @@ const SearchBar = () => {
             SearchQuery ? "pr-10" : ""
           }  py-2 bg-[var(--background)] rounded-full border border-[#303030] text-[var(--foreground)] focus:ring-2 focus:ring-[#1a73e8] font-roboto text-[16px] placeholder-[#aaaaaa] text-right`}
         />
-        <Link href={`${SearchResult ? "" : "/Settings"}`}>
+        <Link href={`${SearchResult ? "/SearchResult" : "/Settings"}`}>
           <Search
             className="absolute left-3 top-1/2 cursor-pointer transform -translate-y-1/2 text-[#aaaaaa]
           hover:text-[var(--foreground)]"
