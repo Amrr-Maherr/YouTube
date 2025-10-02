@@ -52,7 +52,7 @@ export default function NavDrawer() {
 
       <SheetContent
         side="left"
-        className="w-[240px] p-2 bg-[var(--background)] text-[var(--foreground)] border-r border-[#303030] overflow-y-scroll"
+        className="w-[240px] p-2 bg-[var(--background)] text-[var(--foreground)] border-r border-[#303030] overflow-y-auto"
       >
         <SheetHeader>
           <SheetTitle className="text-lg font-bold mb-3">
@@ -76,7 +76,7 @@ export default function NavDrawer() {
           })}
         </nav>
 
-        <div className="my-3 border-t border-[#303030]" />
+        <div className="my-1 border-t border-[#303030]" />
 
         <nav className="flex flex-col">
           {libraryItems.map((item, index) => {
