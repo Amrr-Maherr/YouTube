@@ -52,7 +52,7 @@ export default function NavDrawer() {
 
       <SheetContent
         side="left"
-        className="w-[240px] p-2 bg-[var(--background)] text-[var(--foreground)] border-r border-[#303030]"
+        className="w-[240px] p-2 bg-[var(--background)] text-[var(--foreground)] border-r border-[#303030] overflow-y-scroll"
       >
         <SheetHeader>
           <SheetTitle className="text-lg font-bold mb-3">
