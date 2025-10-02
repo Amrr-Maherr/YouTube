@@ -10,7 +10,7 @@ function SearchResultCard({ video }) {
   return (
     <>
       <Link href="/" key={id.videoId}>
-        <div className="flex items-start p-4 shadow-md rounded-lg mb-4">
+        <div className="flex items-start p-4 mb-4">
           <VideoThumbnail url={thumbnails.high.url} title={title} />
           <VideoInfo
             title={title}
