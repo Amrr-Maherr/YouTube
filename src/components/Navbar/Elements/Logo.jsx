@@ -5,7 +5,22 @@ const Logo = () => {
   return (
     <div className="flex items-center">
       <Link href="/">
-        <Image src="/assets/icons/Logo.svg" alt="Logo" width={90} height={20} priority />
+        <Image
+          src="/assets/icons/Logo.svg"
+          className="hidden dark:block"
+          alt="Logo"
+          width={90}
+          height={20}
+          priority
+        />
+        <Image
+          src="/assets/icons/YouTube-Logo-2017.png"
+          alt="Logo"
+          width={90}
+          height={20}
+          priority
+          className="dark:hidden"
+        />
       </Link>
     </div>
   );
