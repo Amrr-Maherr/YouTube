@@ -13,7 +13,7 @@ function HomeVideosList() {
     dispatch(FetchMostPopularVideos());
   }, [dispatch]);
   return (
-    <section>
+    <section className="container py-2">
       {loading ? (
         <VideoSkeletonList />
       ) : (

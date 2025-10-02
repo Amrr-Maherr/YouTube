@@ -6,7 +6,7 @@ import { Mic } from "lucide-react";
 const Navbar = () => {
   return (
     <div className="w-full bg-[var(--background)] text-[var(--foreground)] border-b shadow-sm !border-0 sticky top-0 z-50 h-full">
-      <div className="flex items-center justify-between flex-row-reverse px-4 py-2  mx-auto">
+      <div className="flex items-center justify-between flex-row-reverse container py-2  mx-auto">
         <UserActions />
         <div className="flex-1 flex items-center justify-center flex-row-reverse">
           <SearchBar />
