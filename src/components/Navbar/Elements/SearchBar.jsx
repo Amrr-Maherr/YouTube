@@ -3,12 +3,23 @@
 import React, { useEffect, useState } from "react";
 import { Search, X } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import { useDispatch, useSelector } from "react-redux";
+import { FetchSearchVideos } from "@/Store/SearchVideosSlice";
 const SearchBar = () => {
-  const [SearchQuery, setSearchQuery] = useState(null)
+  const [SearchQuery, setSearchQuery] = useState("")
+  const SearchResult = useSelector((state) => state.SearchVideos.data);
+  const dispatch = useDispatch()
+
   useEffect(() => {
-    console.log(SearchQuery);
-  }, [SearchQuery])
-  console.log(SearchQuery);
+    if (!SearchQuery) return;
+
+    const SearchTimer = setTimeout(() => {
+      dispatch(FetchSearchVideos(SearchQuery.trim().toLowerCase()));
+    }, 500);
+
+    return () => clearTimeout(SearchTimer);
+  }, [SearchQuery, dispatch])
+
   return (
     <div className="flex-grow max-w-[500px] mx-4 relative">
       <form className="relative">
