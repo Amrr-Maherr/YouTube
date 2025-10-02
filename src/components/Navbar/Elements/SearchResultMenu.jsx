@@ -1,4 +1,6 @@
 function SearchResultMenu({ SearchResult }) {
+    console.log(SearchResult, "SearchResult");
+    
   return (
     <div className="absolute top-10 w-full  bg-[var(--background)] border border-[#303030] rounded-md shadow-lg overflow-y-auto overflow-x-hidden max-h-[400px] z-50">
       {SearchResult.length === 0 ? (
@@ -8,7 +10,7 @@ function SearchResultMenu({ SearchResult }) {
       ) : (
         SearchResult.map((ele) => (
           <div
-            key={ele.id}
+            key={ele.id.videoId}
             className="flex items-center px-4 py-3 cursor-pointer hover:text-[var(--foreground)] transition-colors"
           >
             <img
