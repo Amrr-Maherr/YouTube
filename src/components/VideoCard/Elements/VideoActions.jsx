@@ -3,8 +3,8 @@ import { EllipsisVertical } from "lucide-react";
 
 function VideoActions() {
   return (
-    <div className="hover:bg-[#272727] rounded-full w-[36px] h-[36px] flex items-center justify-center">
-      <EllipsisVertical className="text-white" />
+    <div className="hover:bg-[var(--background)] rounded-full w-[36px] h-[36px] flex items-center justify-center">
+      <EllipsisVertical className="text-[var(--foreground)]" />
     </div>
   );
 }
