@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { useDispatch, useSelector } from "react-redux";
 import { FetchSearchVideos } from "@/Store/SearchVideosSlice";
 import SearchResultMenu from "./SearchResultMenu";
+import Link from "next/link";
 const SearchBar = () => {
   const [SearchQuery, setSearchQuery] = useState("")
   const SearchResult = useSelector((state) => state.SearchVideos.data);
@@ -44,11 +45,13 @@ const SearchBar = () => {
             SearchQuery ? "pr-10" : ""
           }  py-2 bg-[var(--background)] rounded-full border border-[#303030] text-[var(--foreground)] focus:ring-2 focus:ring-[#1a73e8] font-roboto text-[16px] placeholder-[#aaaaaa] text-right`}
         />
-        <Search
-          className="absolute left-3 top-1/2 cursor-pointer transform -translate-y-1/2 text-[#aaaaaa]
+        <Link href={`${SearchResult ? "" : "/Settings"}`}>
+          <Search
+            className="absolute left-3 top-1/2 cursor-pointer transform -translate-y-1/2 text-[#aaaaaa]
           hover:text-[var(--foreground)]"
-          size={20}
-        />
+            size={20}
+          />
+        </Link>
         {SearchQuery && <SearchResultMenu SearchResult={SearchResult} />}
       </form>
     </div>
