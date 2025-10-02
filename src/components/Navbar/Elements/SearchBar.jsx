@@ -5,6 +5,7 @@ import { Search, X } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { useDispatch, useSelector } from "react-redux";
 import { FetchSearchVideos } from "@/Store/SearchVideosSlice";
+import SearchResultMenu from "./SearchResultMenu";
 const SearchBar = () => {
   const [SearchQuery, setSearchQuery] = useState("")
   const SearchResult = useSelector((state) => state.SearchVideos.data);
@@ -48,6 +49,7 @@ const SearchBar = () => {
           hover:text-[var(--foreground)]"
           size={20}
         />
+        {SearchQuery && <SearchResultMenu SearchResult={SearchResult} />}
       </form>
     </div>
   );
