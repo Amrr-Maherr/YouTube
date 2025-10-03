@@ -15,7 +15,7 @@ export const FetchVideoDetails = createAsyncThunk(
           },
         }
       );
-      return response.data;
+      return response.data.items;
     } catch (error) {
       return error.response?.data?.error?.message;
     }

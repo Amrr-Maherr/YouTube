@@ -1,49 +1,32 @@
-import React from "react";
-
-function VideoDetailsCard({ video }) {
+"use client";
+import { Card } from "@/components/ui/card";
+import VideoDescription from "./VideoDescription";
+import VideoStats from "./VideoStats";
+import VideoHeader from "./VideoHeader";
+import VideoThumbnail from "./VideoThumbnail";
+function VideoDetailsCard({ video, id }) {
   if (!video) return null;
+  console.log(video);
 
-  const { snippet } = video;
-  const { title, channelTitle, description, publishedAt } = snippet;
+  const { snippet, statistics } = video;
+  const { title, description, channelTitle, thumbnails, publishedAt } = snippet;
+  const { viewCount, likeCount, commentCount } = statistics;
 
   return (
-    <div className="w-full flex flex-col md:flex-row gap-6">
-      {/* Video Player */}
-      <div className="w-full md:w-2/3">
-        <iframe
-          className="w-full h-64 md:h-96 rounded-lg"
-          src={`https://www.youtube.com/embed/${video.id}`}
-          title={title}
-          frameBorder="0"
-          allowFullScreen
-        ></iframe>
-
-        {/* Video Info */}
-        <div className="mt-4">
-          <h1 className="text-lg md:text-2xl font-bold line-clamp-2">
-            {title}
-          </h1>
-          <p className="text-sm text-gray-400 mt-1">{channelTitle}</p>
-          <p className="text-xs text-gray-500 mt-1">
-            {new Date(publishedAt).toLocaleDateString()}
-          </p>
-        </div>
-
-        {/* Video Description */}
-        <div className="mt-4">
-          <p className="text-sm md:text-base text-[var(--foreground)] whitespace-pre-line">
-            {description}
-          </p>
-        </div>
-      </div>
-
-      {/* Sidebar (Suggested videos for example) */}
-      <div className="hidden md:block w-1/3">
-        <div className="p-4 bg-[var(--background)] rounded-lg shadow">
-          <p className="text-gray-500">Suggested videos section</p>
-        </div>
-      </div>
-    </div>
+    <Card className="w-full bg-transparent border-0 py-1 shadow-none">
+      <VideoThumbnail thumbnails={thumbnails} title={title} id={id} />
+      <VideoHeader
+        title={title}
+        channelTitle={channelTitle}
+        publishedAt={publishedAt}
+      />
+      <VideoStats
+        viewCount={viewCount}
+        likeCount={likeCount}
+        commentCount={commentCount}
+      />
+      <VideoDescription description={description} />
+    </Card>
   );
 }
 
