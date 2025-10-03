@@ -17,7 +17,7 @@ export const FetchChannelDetails = createAsyncThunk(
         }
       );
 
-      return response.data.items;
+      return channelRes.data.items;
     } catch (error) {
       return error.response?.data.error.message;
     }
