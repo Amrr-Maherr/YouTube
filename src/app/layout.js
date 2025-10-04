@@ -20,7 +20,7 @@ export const metadata = {
   description:
     "Enjoy the videos and music you love, upload original content, and share it all with friends, family, and the world on YouTube.",
   icons: {
-    icon: "/icons/youtube.png",
+    icon: "/youtube-v2.png",
   },
 };
 
@@ -33,8 +33,9 @@ export default function RootLayout({ children }) {
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Providers>
-            <Navbar/>
-            {children}</Providers>
+            <Navbar />
+            {children}
+          </Providers>
         </ThemeProvider>
       </body>
     </html>
