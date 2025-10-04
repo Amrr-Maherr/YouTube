@@ -4,29 +4,31 @@ import VideoDescription from "./VideoDescription";
 import VideoStats from "./VideoStats";
 import VideoHeader from "./VideoHeader";
 import VideoThumbnail from "./VideoThumbnail";
-import ChannelAvatar from "./ChannelAvatar";
 
-function VideoDetailsCard({ video, id }) {
+function VideoDetailsCard({ video, id, ChannelDetails }) {
   if (!video) return null;
   const { snippet, statistics } = video;
-  // const { title, description, channelTitle, thumbnails, publishedAt } = snippet;
-  // const { viewCount, likeCount, commentCount } = statistics;
-
+  const { title, description, channelTitle, thumbnails, publishedAt, tags } =
+    snippet;
+  const { viewCount, likeCount, commentCount } = statistics;
+  console.log(snippet, "video");
+  
   return (
     <Card className="w-full bg-transparent border-0 py-1 shadow-none">
-      {/* <VideoThumbnail thumbnails={thumbnails} title={title} id={id} /> */}
-      {/* <VideoHeader
-        title={title}
-        channelTitle={channelTitle}
-        publishedAt={publishedAt}
-      /> */}
-      {/* <ChannelAvatar channelImage={channelImage}/> */}
-      {/* <VideoStats
-        viewCount={viewCount}
-        likeCount={likeCount}
-        commentCount={commentCount}
-      /> */}
-      {/* <VideoDescription description={description} /> */}
+      <VideoThumbnail thumbnails={thumbnails} title={title} id={id} />
+        <VideoHeader
+          title={title}
+          channelTitle={channelTitle}
+          publishedAt={publishedAt}
+          ChannelDetails={ChannelDetails}
+          viewCount={viewCount}
+        />
+        <VideoStats
+          viewCount={viewCount}
+          likeCount={likeCount}
+          commentCount={commentCount}
+        />
+      <VideoDescription description={description} tags={tags} />
     </Card>
   );
 }
