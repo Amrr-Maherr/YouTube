@@ -7,10 +7,13 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import VideoDetailsCard from "../Elements/VideoDetailsCard";
 import { FetchChannelDetails } from "@/Store/ChannelSlice";
+import { FetchVideoComments } from "@/Store/VideoCommentsSlice";
+import VideoComments from "../Comments/VideoComments";
 
 function Page() {
   const { id } = useParams();
   const videoDetails = useSelector((state) => state.VideoDetails.data);
+  const Comments = useSelector((state) => state.VideoComments.data);
   const ChannelDetails = useSelector((state) => state.Channel.data);
   const loading = useSelector((state) => state.VideoDetails.loading);
   const error = useSelector((state) => state.VideoDetails.error);
@@ -20,8 +23,10 @@ function Page() {
     if (id) {
       dispatch(FetchVideoDetails(id));
       dispatch(FetchRelatedVideos(id));
+      dispatch(FetchVideoComments(id));
     }
   }, [id, dispatch]);
+console.log(Comments,"com");
 
   useEffect(() => {
     if (videoDetails?.length > 0) {
@@ -46,6 +51,9 @@ function Page() {
           />
         </div>
       )}
+      <div className="col-span-2">
+        <VideoComments comments={Comments} />
+      </div>
     </div>
   );
 }
