@@ -28,7 +28,7 @@ const ChannelSlice = createSlice({
   name: "channel",
   initialState: {
     data: null,
-    loading: false,
+    loading: true,
     error: null,
   },
   reducers: {},

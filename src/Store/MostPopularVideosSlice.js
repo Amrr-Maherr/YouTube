@@ -30,7 +30,7 @@ const mostPopularVideosSlice = createSlice({
   name: "mostPopularVideos",
   initialState: {
     data: [],
-    loading: false,
+    loading: true,
     error: null,
     nextPageToken: null,
   },

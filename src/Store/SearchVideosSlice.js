@@ -29,7 +29,7 @@ const SearchVideosSlice = createSlice({
   name: "searchVideos",
   initialState: {
     data: [],
-    loading: false,
+    loading: true,
     error: null,
   },
   reducers: {

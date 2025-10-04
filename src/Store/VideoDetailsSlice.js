@@ -26,7 +26,7 @@ const VideoDetailsSlice = createSlice({
   name: "videos",
   initialState: {
     data: null,
-    loading: false,
+    loading: true,
     error: null,
   },
   reducers: {},

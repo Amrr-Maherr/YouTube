@@ -42,7 +42,7 @@ const I18nSlice = createSlice({
   initialState: {
     languages: [],
     regions: [],
-    loading: false,
+    loading: true,
     error: null,
   },
   reducers: {},

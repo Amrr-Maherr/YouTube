@@ -30,7 +30,7 @@ const VideoCommentsSlice = createSlice({
   name: "comments",
   initialState: {
     data: null,
-    loading: false,
+    loading: true,
     error: null,
   },
   reducers: {},
