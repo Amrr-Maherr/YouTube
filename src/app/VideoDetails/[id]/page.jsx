@@ -41,20 +41,22 @@ console.log(Comments,"com");
     return <div className="text-red-500">Error: {error}</div>;
   }
   return (
-    <div className="p-6 space-y-6 grid grid-cols-1 md:grid-cols-3 gap-6">
-      {videoDetails?.length > 0 && (
-        <div className="md:col-span-2">
-          <VideoDetailsCard
-            video={videoDetails[0]}
-            id={id}
-            ChannelDetails={ChannelDetails}
-          />
+    <section className="container mx-auto">
+      <div className="space-y-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+        {videoDetails?.length > 0 && (
+          <div className=" col-span-12 md:col-span-2">
+            <VideoDetailsCard
+              video={videoDetails[0]}
+              id={id}
+              ChannelDetails={ChannelDetails}
+            />
+          </div>
+        )}
+        <div className="col-span-12 md:col-span-2">
+          <VideoComments comments={Comments} />
         </div>
-      )}
-      <div className="col-span-2">
-        <VideoComments comments={Comments} />
       </div>
-    </div>
+    </section>
   );
 }
 
