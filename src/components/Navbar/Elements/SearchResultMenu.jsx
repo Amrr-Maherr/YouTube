@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 function SearchResultMenu({ SearchResult }) {
     console.log(SearchResult, "SearchResult");
     
@@ -9,24 +11,23 @@ function SearchResultMenu({ SearchResult }) {
         </p>
       ) : (
         SearchResult.map((ele) => (
-          <div
-            key={ele.id.videoId}
-            className="flex items-center px-4 py-3 cursor-pointer hover:text-[var(--foreground)] transition-colors"
-          >
-            <img
-              src={ele.snippet.thumbnails.default.url}
-              alt={ele.snippet.title}
-              className="w-12 h-12 rounded-md mr-4"
-            />
-            <div className="flex-1 text-left">
-              <p className="text-sm font-medium text-[var(--foreground)] line-clamp-2">
-                {ele.snippet.title}
-              </p>
-              <p className="text-xs text-[var(--foreground)]">
-                {ele.snippet.channelTitle}
-              </p>
+          <Link href={`/VideoDetails/${ele.id.videoId}`} key={ele.id.videoId}>
+            <div className="flex items-center px-4 py-3 cursor-pointer hover:text-[var(--foreground)] transition-colors">
+              <img
+                src={ele.snippet.thumbnails.default.url}
+                alt={ele.snippet.title}
+                className="w-12 h-12 rounded-md mr-4"
+              />
+              <div className="flex-1 text-left">
+                <p className="text-sm font-medium text-[var(--foreground)] line-clamp-2">
+                  {ele.snippet.title}
+                </p>
+                <p className="text-xs text-[var(--foreground)]">
+                  {ele.snippet.channelTitle}
+                </p>
+              </div>
             </div>
-          </div>
+          </Link>
         ))
       )}
     </div>
