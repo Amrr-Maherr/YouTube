@@ -5,7 +5,7 @@ function VideoDescription({ description, tags }) {
   const [showMore, setShowMore] = useState(false);
 
   return (
-    <div className="bg-[#3f3f3f] p-4 rounded-xl text-sm text-[var(--foreground)] whitespace-pre-line">
+    <div className="bg-[var(--light-background-secondary)] p-4 rounded-xl text-sm text-[var(--foreground)] whitespace-pre-line">
       {showMore ? description : description.slice(0, 200) + "..."}
       {description.length > 200 && (
         <button
