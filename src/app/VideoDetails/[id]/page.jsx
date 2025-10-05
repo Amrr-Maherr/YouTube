@@ -35,7 +35,7 @@ function Page() {
       dispatch(FetchChannelDetails(channelId));
     }
   }, [videoDetails, dispatch]);
-  
+
   if (loading) {
     return <VideoDetailsSkeleton />;
   }
@@ -44,9 +44,9 @@ function Page() {
   }
   return (
     <section className="container mx-auto">
-      <div className="space-y-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="space-y-6 grid grid-cols-1 md:grid-cols-4 gap-6">
         {videoDetails?.length > 0 && (
-          <div className=" col-span-12 md:col-span-2">
+          <div className=" col-span-12 md:col-span-3">
             <VideoDetailsCard
               video={videoDetails[0]}
               id={id}
