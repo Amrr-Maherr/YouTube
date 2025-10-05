@@ -1,8 +1,13 @@
 import Link from "next/link";
+import SearchResultSkeleton from "./SearchResultSkeleton";
 
-function SearchResultMenu({ SearchResult }) {
-    console.log(SearchResult, "SearchResult");
-    
+function SearchResultMenu({ SearchResult, loading }) {
+  console.log(SearchResult, "SearchResult");
+  if (loading) {
+    return (
+      <SearchResultSkeleton/>
+    )
+  }
   return (
     <div className="absolute top-10 w-full  bg-[var(--background)] border border-[#303030] rounded-md shadow-lg overflow-y-auto overflow-x-hidden max-h-[400px] z-50">
       {SearchResult.length === 0 ? (

@@ -10,6 +10,7 @@ import Link from "next/link";
 const SearchBar = () => {
   const [SearchQuery, setSearchQuery] = useState("")
   const SearchResult = useSelector((state) => state.SearchVideos.data);
+  const loading = useSelector((state) => state.SearchVideos.loading);
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -52,7 +53,9 @@ const SearchBar = () => {
             size={20}
           />
         </Link>
-        {SearchQuery && <SearchResultMenu SearchResult={SearchResult} />}
+        {SearchQuery && (
+          <SearchResultMenu SearchResult={SearchResult} loading={loading} />
+        )}
       </form>
     </div>
   );
