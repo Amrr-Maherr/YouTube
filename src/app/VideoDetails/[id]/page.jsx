@@ -14,7 +14,7 @@ import VideoCard from "../../../components/VideoCard/Index";
 function Page() {
   const { id } = useParams();
   const videoDetails = useSelector((state) => state.VideoDetails.data);
-    const Videos = useSelector((state) => state.MostPopularVideos.data);
+  const RelatedVideos = useSelector((state) => state.RelatedVideos.data);
   const Comments = useSelector((state) => state.VideoComments.data);
   const ChannelDetails = useSelector((state) => state.Channel.data);
   const loading = useSelector((state) => state.VideoDetails.loading);
@@ -28,14 +28,16 @@ function Page() {
       dispatch(FetchVideoComments(id));
     }
   }, [id, dispatch]);
+  console.log(RelatedVideos, "RelatedVideos");
 
   useEffect(() => {
     if (videoDetails?.length > 0) {
       const channelId = videoDetails[0]?.snippet?.channelId;
+      const query = videoDetails[0]?.snippet?.title.slice(0, 10);
       dispatch(FetchChannelDetails(channelId));
+      dispatch(FetchRelatedVideos(query));
     }
   }, [videoDetails, dispatch]);
-
   if (loading) {
     return <VideoDetailsSkeleton />;
   }
@@ -56,8 +58,8 @@ function Page() {
           </div>
         )}
         <div className="col-span-12 md:col-span-1">
-          {Videos.map((video) => (
-            <VideoCard video={video} key={video.id} />
+          {RelatedVideos.map((video) => (
+            <VideoCard video={video} key={video.id.videoId || video.id} />
           ))}
         </div>
       </div>

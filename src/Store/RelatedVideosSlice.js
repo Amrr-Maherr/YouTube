@@ -4,14 +4,16 @@ import axios from "axios";
 // Async thunk to fetch related videos
 export const FetchRelatedVideos = createAsyncThunk(
   "videos/fetchRelatedVideos",
-  async (videoId) => {
+  async (query) => {
     try {
       const response = await axios.get(
         "https://www.googleapis.com/youtube/v3/search",
         {
           params: {
             part: "snippet",
-            id: videoId,
+            type: "video",
+            q: query,
+            maxResults: 10,
             key: "AIzaSyAMnZmDB1MLSZo4wRWt_ylmgbsDSxRZcTM",
           },
         }
