@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import VideoTags from "./VideoTags";
 
 function VideoDescription({ description, tags }) {
   const [showMore, setShowMore] = useState(false);
@@ -15,18 +16,7 @@ function VideoDescription({ description, tags }) {
           {showMore ? "Show less" : "Show more"}
         </button>
       )}
-      {tags && tags.length > 0 && (
-        <div className="flex flex-wrap gap-2 mt-3">
-          {tags.map((tag, index) => (
-            <span
-              key={index}
-              className="text-blue-400 hover:text-blue-500 cursor-pointer text-sm"
-            >
-              #{tag}
-            </span>
-          ))}
-        </div>
-      )}
+      <VideoTags tags={tags}/>
     </div>
   );
 }
