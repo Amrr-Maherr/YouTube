@@ -4,8 +4,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 
 function VideoDetailsSkeleton() {
   return (
-    <div className="w-full bg-[var(--background)] text-[var(--foreground)] p-4">
-      {/* مشغل الفيديو */}
+    <div className="w-full bg-[var(--background)] text-[var(--foreground)] p-4 container">
       <Skeleton
         height={400}
         borderRadius={8}
@@ -13,7 +12,6 @@ function VideoDetailsSkeleton() {
         highlightColor="var(--foreground)"
       />
 
-      {/* عنوان الفيديو */}
       <div className="mt-4">
         <Skeleton
           height={24}
@@ -30,7 +28,6 @@ function VideoDetailsSkeleton() {
         />
       </div>
 
-      {/* معلومات القناة */}
       <div className="flex items-center justify-between mt-6">
         <div className="flex items-center space-x-3">
           <Skeleton

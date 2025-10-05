@@ -9,10 +9,12 @@ import VideoDetailsCard from "../Elements/VideoDetailsCard";
 import { FetchChannelDetails } from "@/Store/ChannelSlice";
 import { FetchVideoComments } from "@/Store/VideoCommentsSlice";
 import VideoComments from "../Comments/VideoComments";
-
+import { FetchMostPopularVideos } from "@/Store/MostPopularVideosSlice";
+import VideoCard from "../../../components/VideoCard/Index";
 function Page() {
   const { id } = useParams();
   const videoDetails = useSelector((state) => state.VideoDetails.data);
+    const Videos = useSelector((state) => state.MostPopularVideos.data);
   const Comments = useSelector((state) => state.VideoComments.data);
   const ChannelDetails = useSelector((state) => state.Channel.data);
   const loading = useSelector((state) => state.VideoDetails.loading);
@@ -21,12 +23,11 @@ function Page() {
 
   useEffect(() => {
     if (id) {
+      dispatch(FetchMostPopularVideos({}));
       dispatch(FetchVideoDetails(id));
-      dispatch(FetchRelatedVideos(id));
       dispatch(FetchVideoComments(id));
     }
   }, [id, dispatch]);
-console.log(Comments,"com");
 
   useEffect(() => {
     if (videoDetails?.length > 0) {
@@ -34,6 +35,7 @@ console.log(Comments,"com");
       dispatch(FetchChannelDetails(channelId));
     }
   }, [videoDetails, dispatch]);
+  
   if (loading) {
     return <VideoDetailsSkeleton />;
   }
@@ -50,10 +52,13 @@ console.log(Comments,"com");
               id={id}
               ChannelDetails={ChannelDetails}
             />
+            <VideoComments comments={Comments} />
           </div>
         )}
-        <div className="col-span-12 md:col-span-2">
-          <VideoComments comments={Comments} />
+        <div className="col-span-12 md:col-span-1">
+          {Videos.map((video) => (
+            <VideoCard video={video} key={video.id} />
+          ))}
         </div>
       </div>
     </section>
