@@ -4,6 +4,7 @@ import VideoDescription from "./VideoDescription";
 import VideoStats from "./VideoStats";
 import VideoHeader from "./VideoHeader";
 import VideoThumbnail from "./VideoThumbnail";
+import CommentInput from "../Comments/CommentInput";
 
 function VideoDetailsCard({ video, id, ChannelDetails }) {
   if (!video) return null;
@@ -29,6 +30,7 @@ function VideoDetailsCard({ video, id, ChannelDetails }) {
           commentCount={commentCount}
         />
       <VideoDescription description={description} tags={tags} />
+      <CommentInput/>
     </Card>
   );
 }
