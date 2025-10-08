@@ -37,7 +37,7 @@ function Page() {
       dispatch(FetchChannelDetails(channelId));
       dispatch(FetchRelatedVideos(query));
     }
-  }, [videoDetails, dispatch]);
+  }, [videoDetails, dispatch,id]);
   if (loading) {
     return <VideoDetailsSkeleton />;
   }
