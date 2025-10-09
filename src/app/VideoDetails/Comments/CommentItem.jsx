@@ -14,7 +14,7 @@ function CommentItem({ author, text, avatar, likeCount, totalReplyCount }) {
           <AvatarFallback>{author?.charAt(0).toUpperCase()}</AvatarFallback>
         </Avatar>
         <div className="flex flex-col">
-          <p className="text-sm font-semibold">{author}</p>
+          <p className="text-sm font-semibold mb-1">{author}</p>
           <p className="text-sm text-gray-700">{text}</p>
           <div className="flex items-center gap-4 mt-1">
             <div className="flex items-center gap-1 text-gray-500 cursor-pointer">
@@ -37,7 +37,9 @@ function CommentItem({ author, text, avatar, likeCount, totalReplyCount }) {
           </div>
         </div>
       </div>
-      {showReplies && <div className="ml-12 text-sm text-gray-600">Replies go here...</div>}
+      {showReplies && (
+        <div className="ml-12 text-sm text-gray-600">Replies go here...</div>
+      )}
     </div>
   );
 }
