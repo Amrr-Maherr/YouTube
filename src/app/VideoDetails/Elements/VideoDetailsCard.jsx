@@ -6,6 +6,8 @@ import VideoHeader from "./VideoHeader";
 import VideoThumbnail from "./VideoThumbnail";
 import CommentInput from "../Comments/CommentInput";
 import Link from "next/link";
+import { useEffect } from "react";
+import VideoCommentsHeader from "./VideoCommentsHeader";
 
 function VideoDetailsCard({ video, id, ChannelDetails }) {
   if (!video) return null;
@@ -14,11 +16,11 @@ function VideoDetailsCard({ video, id, ChannelDetails }) {
     snippet;
   const { viewCount, likeCount, commentCount } = statistics;
   console.log(snippet, "video");
-  console.log(ChannelDetails[0].id, "ChannelDetails");
+  const ChannelId = ChannelDetails?.[0]?.id;
   
   return (
     <Card className="w-full bg-transparent border-0 py-1 shadow-none">
-      <Link href={`/Channel/${ChannelDetails[0].id}`}>
+      <Link href={`/Channel/${ChannelId}`}>
         <VideoThumbnail thumbnails={thumbnails} title={title} id={id} />
         <VideoHeader
           title={title}
@@ -28,12 +30,9 @@ function VideoDetailsCard({ video, id, ChannelDetails }) {
           viewCount={viewCount}
         />
       </Link>
-      <VideoStats
-        viewCount={viewCount}
-        likeCount={likeCount}
-        commentCount={commentCount}
-      />
+      <VideoStats viewCount={viewCount} likeCount={likeCount} />
       <VideoDescription description={description} tags={tags} />
+      <VideoCommentsHeader commentCount={commentCount} />
       <CommentInput />
     </Card>
   );

@@ -8,7 +8,7 @@ function CommentInput() {
         className="
           border-b border-gray-300 
           border-t-0 border-l-0 border-r-0 
-          bg-transparent 
+          !bg-transparent 
           rounded-none 
           focus:outline-none 
           focus:border-blue-500 
