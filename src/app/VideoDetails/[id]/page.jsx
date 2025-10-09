@@ -11,6 +11,7 @@ import { FetchVideoComments } from "@/Store/VideoCommentsSlice";
 import VideoComments from "../Comments/VideoComments";
 import { FetchMostPopularVideos } from "@/Store/MostPopularVideosSlice";
 import VideoCard from "../../../components/VideoCard/Index";
+import useVideoTitle from "@/hooks/useVideoTitle";
 function Page() {
   const { id } = useParams();
   const videoDetails = useSelector((state) => state.VideoDetails.data);
@@ -29,7 +30,7 @@ function Page() {
     }
   }, [id, dispatch]);
   console.log(RelatedVideos, "RelatedVideos");
-
+  useVideoTitle(videoDetails);
   useEffect(() => {
     if (videoDetails?.length > 0) {
       const channelId = videoDetails[0]?.snippet?.channelId;
@@ -45,25 +46,27 @@ function Page() {
     return <div className="text-red-500">Error: {error}</div>;
   }
   return (
-    <section className="container mx-auto">
-      <div className="space-y-6 grid grid-cols-1 md:grid-cols-4 gap-6">
-        {videoDetails?.length > 0 && (
-          <div className=" col-span-12 md:col-span-3">
-            <VideoDetailsCard
-              video={videoDetails[0]}
-              id={id}
-              ChannelDetails={ChannelDetails}
-            />
-            <VideoComments comments={Comments} />
+    <>
+      <section className="container mx-auto">
+        <div className="space-y-6 grid grid-cols-1 md:grid-cols-4 gap-6">
+          {videoDetails?.length > 0 && (
+            <div className=" col-span-12 md:col-span-3">
+              <VideoDetailsCard
+                video={videoDetails[0]}
+                id={id}
+                ChannelDetails={ChannelDetails}
+              />
+              <VideoComments comments={Comments} />
+            </div>
+          )}
+          <div className="col-span-12 md:col-span-1">
+            {RelatedVideos.map((video) => (
+              <VideoCard video={video} key={video.id.videoId || video.id} />
+            ))}
           </div>
-        )}
-        <div className="col-span-12 md:col-span-1">
-          {RelatedVideos.map((video) => (
-            <VideoCard video={video} key={video.id.videoId || video.id} />
-          ))}
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
 

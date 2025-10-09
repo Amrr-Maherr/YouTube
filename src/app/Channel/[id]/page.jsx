@@ -1,7 +1,7 @@
 "use client";
 import { FetchChannelDetails } from "@/Store/ChannelSlice";
 import { useParams } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect,useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 function Page() {
   const { id } = useParams();
