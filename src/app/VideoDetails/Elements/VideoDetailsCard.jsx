@@ -5,6 +5,7 @@ import VideoStats from "./VideoStats";
 import VideoHeader from "./VideoHeader";
 import VideoThumbnail from "./VideoThumbnail";
 import CommentInput from "../Comments/CommentInput";
+import Link from "next/link";
 
 function VideoDetailsCard({ video, id, ChannelDetails }) {
   if (!video) return null;
@@ -13,10 +14,12 @@ function VideoDetailsCard({ video, id, ChannelDetails }) {
     snippet;
   const { viewCount, likeCount, commentCount } = statistics;
   console.log(snippet, "video");
+  console.log(ChannelDetails[0].id, "ChannelDetails");
   
   return (
     <Card className="w-full bg-transparent border-0 py-1 shadow-none">
-      <VideoThumbnail thumbnails={thumbnails} title={title} id={id} />
+      <Link href={`/Channel/${ChannelDetails[0].id}`}>
+        <VideoThumbnail thumbnails={thumbnails} title={title} id={id} />
         <VideoHeader
           title={title}
           channelTitle={channelTitle}
@@ -24,13 +27,14 @@ function VideoDetailsCard({ video, id, ChannelDetails }) {
           ChannelDetails={ChannelDetails}
           viewCount={viewCount}
         />
-        <VideoStats
-          viewCount={viewCount}
-          likeCount={likeCount}
-          commentCount={commentCount}
-        />
+      </Link>
+      <VideoStats
+        viewCount={viewCount}
+        likeCount={likeCount}
+        commentCount={commentCount}
+      />
       <VideoDescription description={description} tags={tags} />
-      <CommentInput/>
+      <CommentInput />
     </Card>
   );
 }

@@ -25,6 +25,8 @@ function Page() {
       const Banner = Channel[0].brandingSettings.image.bannerExternalUrl;
     }
   }, [Channel]);
+  console.log(Channel,"ch");
+  
   return (
     <>
     </>
