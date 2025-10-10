@@ -7,18 +7,23 @@ import BannerComponent from "../Elements/BannerComponent";
 import ChannelInfoComponent from "../Elements/ChannelInfoComponent";
 import ChannelDescriptionComponent from "../Elements/ChannelDescriptionComponent";
 import ChannelPageSkeleton from "../Elements/ChannelPageSkeleton";
+import { FetchChannelVideos } from "@/Store/ChannelVideosSlice";
 
 export default function Page() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const Channel = useSelector((state) => state.Channel.data);
+  const ChannelVideos = useSelector((state) => state.ChannelVideos.data);
   const error = useSelector((state) => state.error);
   const loading = useSelector((state) => state.loading);
 
   // fetch channel data
   useEffect(() => {
+    const channelId = Channel[0].contentDetails.relatedPlaylists.uploads;
     if (id) dispatch(FetchChannelDetails(id));
+    dispatch(FetchChannelVideos(channelId));
   }, [id, dispatch]);
+console.log(ChannelVideos, "ChannelVideos");
 
   if (loading) return <ChannelPageSkeleton/>;
   if (error) return <p className="text-center mt-10 text-red-500">{error}</p>;
