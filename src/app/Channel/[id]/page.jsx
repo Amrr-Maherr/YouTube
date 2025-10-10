@@ -8,25 +8,42 @@ import ChannelInfoComponent from "../Elements/ChannelInfoComponent";
 import ChannelDescriptionComponent from "../Elements/ChannelDescriptionComponent";
 import ChannelPageSkeleton from "../Elements/ChannelPageSkeleton";
 import { FetchChannelVideos } from "@/Store/ChannelVideosSlice";
-
+import { FetchPlaylistItems } from "@/Store/PlaylistSlice";
+import PlaylistVideoCard from "../Elements/PlaylistVideoCard";
+import VideoCard from "../../../components/VideoCard/Index";
+import ChannelPlayLists from "../Elements/ChannelPlayLists";
+import ChannelVideosSection from "../Elements/ChannelVideosSection";
 export default function Page() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const Channel = useSelector((state) => state.Channel.data);
   const ChannelVideos = useSelector((state) => state.ChannelVideos.data);
+  const ChannelPlayList = useSelector((state) => state.Playlist.data);
   const error = useSelector((state) => state.error);
   const loading = useSelector((state) => state.loading);
 
-  // fetch channel data
   useEffect(() => {
-    const channelId = Channel[0].contentDetails.relatedPlaylists.uploads;
     if (id) dispatch(FetchChannelDetails(id));
-    dispatch(FetchChannelVideos(channelId));
   }, [id, dispatch]);
-console.log(ChannelVideos, "ChannelVideos");
 
-  if (loading) return <ChannelPageSkeleton/>;
+  useEffect(() => {
+    if (Channel && Channel.length > 0) {
+      const uploadsPlaylistId =
+        Channel[0]?.contentDetails?.relatedPlaylists?.uploads;
+      if (uploadsPlaylistId) {
+        dispatch(FetchChannelVideos(uploadsPlaylistId));
+        dispatch(FetchPlaylistItems(uploadsPlaylistId));
+      }
+    }
+  }, [Channel, dispatch]);
+
+  console.log(ChannelVideos, "ChannelVideos");
+  console.log(ChannelPlayList, "ChannelPlayList");
+
+  if (loading) return <ChannelPageSkeleton />;
   if (error) return <p className="text-center mt-10 text-red-500">{error}</p>;
+  if (!Channel || Channel.length === 0)
+    return <p className="text-center mt-10 text-gray-500">No channel data</p>;
 
   const channelData = Channel[0];
   const snippet = channelData.snippet;
@@ -41,20 +58,25 @@ console.log(ChannelVideos, "ChannelVideos");
   const subscriberCount = Number(statistics?.subscriberCount).toLocaleString();
   const videoCount = Number(statistics?.videoCount).toLocaleString();
   const viewCount = Number(statistics?.viewCount).toLocaleString();
- const fallbackBanner =
-   "https://via.placeholder.com/1280x360.png?text=No+Banner+Available";
+  const fallbackBanner =
+    "https://via.placeholder.com/1280x360.png?text=No+Banner+Available";
+
   return (
     <div className="w-full">
       <BannerComponent bannerUrl={banner} fallbackUrl={fallbackBanner} />
-      <ChannelInfoComponent
-        thumbnail={thumbnail}
-        title={title}
-        customUrl={customUrl}
-        subscriberCount={subscriberCount}
-        videoCount={videoCount}
-        viewCount={viewCount}
-      />
-      <ChannelDescriptionComponent description={description} />
+      <div className="container mx-auto">
+        <ChannelInfoComponent
+          thumbnail={thumbnail}
+          title={title}
+          customUrl={customUrl}
+          subscriberCount={subscriberCount}
+          videoCount={videoCount}
+          viewCount={viewCount}
+        />
+        <ChannelDescriptionComponent description={description} />
+        <ChannelVideosSection ChannelVideos={ChannelVideos}/>
+        <ChannelPlayLists ChannelPlayList={ChannelPlayList}/>
+      </div>
     </div>
   );
 }
