@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import BannerComponent from "../Elements/BannerComponent";
 import ChannelInfoComponent from "../Elements/ChannelInfoComponent";
 import ChannelDescriptionComponent from "../Elements/ChannelDescriptionComponent";
+import ChannelPageSkeleton from "../Elements/ChannelPageSkeleton";
 
 export default function Page() {
   const { id } = useParams();
@@ -19,10 +20,8 @@ export default function Page() {
     if (id) dispatch(FetchChannelDetails(id));
   }, [id, dispatch]);
 
-  if (loading) return <p className="text-center mt-10">Loading...</p>;
+  if (loading) return <ChannelPageSkeleton/>;
   if (error) return <p className="text-center mt-10 text-red-500">{error}</p>;
-  if (!Channel)
-    return <p className="text-center mt-10 text-gray-500">No channel data</p>;
 
   const channelData = Channel[0];
   const snippet = channelData.snippet;
