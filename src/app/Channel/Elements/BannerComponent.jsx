@@ -4,7 +4,7 @@ export default function BannerComponent({ bannerUrl, fallbackUrl }) {
   if (!bannerUrl && !fallbackUrl) return null;
 
   return (
-    <div className="!w-full h-20 md:h-48 relative">
+    <div className="!w-full h-50 md:h-100 relative">
       <img
         src={bannerUrl || fallbackUrl}
         alt="Channel Banner"
