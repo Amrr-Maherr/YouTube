@@ -13,6 +13,7 @@ import PlaylistVideoCard from "../Elements/PlaylistVideoCard";
 import VideoCard from "../../../components/VideoCard/Index";
 import ChannelPlayLists from "../Elements/ChannelPlayLists";
 import ChannelVideosSection from "../Elements/ChannelVideosSection";
+import ChannelTabs from "../Elements/ChannelTabs";
 export default function Page() {
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -73,9 +74,11 @@ export default function Page() {
           videoCount={videoCount}
           viewCount={viewCount}
         />
-        <ChannelDescriptionComponent description={description} />
-        <ChannelVideosSection ChannelVideos={ChannelVideos}/>
-        <ChannelPlayLists ChannelPlayList={ChannelPlayList}/>
+        <ChannelTabs
+          ChannelVideos={ChannelVideos}
+          ChannelPlayList={ChannelPlayList}
+          description={description}
+        />
       </div>
     </div>
   );

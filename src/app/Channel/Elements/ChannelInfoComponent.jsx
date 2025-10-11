@@ -7,7 +7,7 @@ export default function ChannelInfoComponent({
   viewCount,
 }) {
   return (
-    <div className="max-w-5xl mx-auto px-4 mt-6 flex flex-col md:flex-row gap-4 items-center md:items-start">
+    <div className="mx-auto px-4 mt-6 flex flex-col md:flex-row gap-4 items-center md:items-start">
       {thumbnail && (
         <div className="order-1 md:order-1 relative w-28 h-28 md:w-32 md:h-32 rounded-full shadow-md overflow-hidden">
           <img

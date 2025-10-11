@@ -12,11 +12,13 @@ function VideoInfo({ video }) {
           </p>
         )}
       </div>
-      <div>
-        <p className="text-[14px] text-[var(--muted-foreground)] mt-1">
-          {Number(video.statistics?.viewCount).toLocaleString()} views
-        </p>
-      </div>
+      {video.statistics?.viewCount && (
+        <div>
+          <p className="text-[14px] text-[var(--muted-foreground)] mt-1">
+            {Number(video.statistics?.viewCount).toLocaleString()} views
+          </p>
+        </div>
+      )}
     </div>
   );
 }
