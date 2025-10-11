@@ -21,7 +21,9 @@ export default function HomeTab({
       {/* Featured Video */}
       {featuredVideo && (
         <div className="w-full">
-          <h2 className="text-xl font-bold mb-3 text-white">Featured Video</h2>
+          <h2 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">
+            Featured Video
+          </h2>
           <iframe
             className="w-full h-100 md:h-screen rounded-xl"
             src={`https://www.youtube.com/embed/${featuredVideo.snippet.resourceId.videoId}`}
@@ -36,7 +38,9 @@ export default function HomeTab({
       {/* Latest Uploads */}
       {safeVideos.length > 0 && (
         <div>
-          <h2 className="text-xl font-bold mb-3 text-white">Latest Uploads</h2>
+          <h2 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">
+            Latest Uploads
+          </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {safeVideos.slice(0, 6).map((video) => (
               <VideoCard key={video.id} video={video} />
@@ -44,10 +48,11 @@ export default function HomeTab({
           </div>
         </div>
       )}
-      {/* Latest Uploads */}
+
+      {/* Latest PlayLists */}
       {safeVideos.length > 0 && (
         <div>
-          <h2 className="text-xl font-bold mb-3 text-white">
+          <h2 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">
             Latest PlayLists
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -61,8 +66,10 @@ export default function HomeTab({
       {/* About Preview */}
       {description && (
         <div>
-          <h2 className="text-xl font-bold mb-3 text-white">About</h2>
-          <p className="text-gray-300">
+          <h2 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">
+            About
+          </h2>
+          <p className="text-gray-700 dark:text-gray-300">
             {description.length > 200
               ? description.slice(0, 200) + "..."
               : description}
