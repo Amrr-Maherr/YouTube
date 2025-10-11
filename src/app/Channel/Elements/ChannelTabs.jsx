@@ -8,8 +8,8 @@ import HomeTab from "./HomeTab";
 
 function ChannelTabs({ ChannelPlayList, ChannelVideos, description }) {
   return (
-    <Tabs defaultValue="home" className="w-full my-4 container mx-auto p-0">
-      <TabsList className="flex justify-start gap-4 bg-transparent border-b border-gray-700 rounded-none w-full">
+    <Tabs defaultValue="home" className="w-full my-4 container mx-auto !p-0">
+      <TabsList className="flex justify-start gap-4 bg-transparent border-b border-gray-700 rounded-none w-full !p-0">
         <TabsTrigger
           value="home"
           className="rounded-none data-[state=active]:border-b-2 data-[state=active]:border-white text-white data-[state=active]:font-semibold"
