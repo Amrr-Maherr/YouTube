@@ -25,7 +25,7 @@ console.log(safePlaylists, "safePlaylists");
         <div className="w-full">
           <h2 className="text-xl font-bold mb-3 text-white">Featured Video</h2>
           <iframe
-            className="w-full h-64 md:h-150 rounded-xl"
+            className="w-full h-64 md:h-screen rounded-xl"
             src={`https://www.youtube.com/embed/${featuredVideo.snippet.resourceId.videoId}`}
             title={featuredVideo.snippet.title}
             frameBorder="0"
