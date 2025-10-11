@@ -6,7 +6,12 @@ import ChannelVideosSection from "./ChannelVideosSection";
 import ChannelDescriptionComponent from "./ChannelDescriptionComponent";
 import HomeTab from "./HomeTab";
 
-function ChannelTabs({ ChannelPlayList, ChannelVideos, description }) {
+function ChannelTabs({ ChannelPlayList, ChannelVideos, description, loading }) {
+  if (loading) {
+    return (
+      <p className="text-white">loading</p>
+    )
+  }
   return (
     <Tabs defaultValue="home" className="w-full my-4 container mx-auto !p-0">
       <TabsList className="flex justify-start gap-4 bg-transparent border-b border-gray-700 rounded-none w-full !p-0">

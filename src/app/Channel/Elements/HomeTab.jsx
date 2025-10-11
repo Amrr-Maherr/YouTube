@@ -15,17 +15,15 @@ export default function HomeTab({
 
   const featuredVideo =
     safeVideos && safeVideos.length > 0 ? safeVideos[0] : null;
-console.log(safePlaylists, "safePlaylists");
-// console.log(featuredVideo.snippet.title, "featuredVideo");
 
   return (
     <div className="space-y-8">
       {/* Featured Video */}
-      {featuredVideo ? (
+      {featuredVideo && (
         <div className="w-full">
           <h2 className="text-xl font-bold mb-3 text-white">Featured Video</h2>
           <iframe
-            className="w-full h-64 md:h-screen rounded-xl"
+            className="w-full h-100 md:h-screen rounded-xl"
             src={`https://www.youtube.com/embed/${featuredVideo.snippet.resourceId.videoId}`}
             title={featuredVideo.snippet.title}
             frameBorder="0"
@@ -33,8 +31,6 @@ console.log(safePlaylists, "safePlaylists");
             allowFullScreen
           ></iframe>
         </div>
-      ) : (
-        <p className="text-gray-500 text-center">No featured video available</p>
       )}
 
       {/* Latest Uploads */}

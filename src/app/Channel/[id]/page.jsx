@@ -43,7 +43,7 @@ export default function Page() {
 
   if (loading) return <ChannelPageSkeleton />;
   if (error) return <p className="text-center mt-10 text-red-500">{error}</p>;
-  if (!Channel || Channel.length === 0)
+  if (!Channel)
     return <p className="text-center mt-10 text-gray-500">No channel data</p>;
 
   const channelData = Channel[0];
@@ -78,6 +78,7 @@ export default function Page() {
           ChannelVideos={ChannelVideos}
           ChannelPlayList={ChannelPlayList}
           description={description}
+          loading={loading}
         />
       </div>
     </div>
