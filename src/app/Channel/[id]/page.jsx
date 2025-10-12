@@ -59,12 +59,10 @@ export default function Page() {
   const subscriberCount = Number(statistics?.subscriberCount).toLocaleString();
   const videoCount = Number(statistics?.videoCount).toLocaleString();
   const viewCount = Number(statistics?.viewCount).toLocaleString();
-  const fallbackBanner =
-    "https://via.placeholder.com/1280x360.png?text=No+Banner+Available";
 
   return (
     <div className="w-full">
-      <BannerComponent bannerUrl={banner} fallbackUrl={fallbackBanner} />
+      <BannerComponent bannerUrl={banner} />
       <div className="container mx-auto">
         <ChannelInfoComponent
           thumbnail={thumbnail}

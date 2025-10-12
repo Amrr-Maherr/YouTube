@@ -1,8 +1,6 @@
 import Image from "next/image";
 
-export default function BannerComponent({ bannerUrl, fallbackUrl }) {
-  if (!bannerUrl && !fallbackUrl) return null;
-
+export default function BannerComponent({ bannerUrl }) {
   return (
     <div className="!w-full h-50 md:h-100 relative">
       <img
