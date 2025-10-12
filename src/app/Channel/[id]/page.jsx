@@ -62,7 +62,7 @@ export default function Page() {
 
   return (
     <div className="w-full">
-      <BannerComponent bannerUrl={banner} />
+      {banner && <BannerComponent bannerUrl={banner} />}
       <div className="container mx-auto">
         <ChannelInfoComponent
           thumbnail={thumbnail}

@@ -25,7 +25,7 @@ export default function HomeTab({
             Featured Video
           </h2>
           <iframe
-            className="w-full h-100 md:h-screen rounded-xl"
+            className="w-full h-100 md:h-[80dvh] rounded-xl"
             src={`https://www.youtube.com/embed/${featuredVideo.snippet.resourceId.videoId}`}
             title={featuredVideo.snippet.title}
             frameBorder="0"
