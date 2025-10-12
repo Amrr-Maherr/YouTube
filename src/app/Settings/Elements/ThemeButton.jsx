@@ -8,7 +8,7 @@ function ThemeButton() {
   // Fixed useEffect for initial theme load (run only on mount)
   useEffect(() => {
     const themeCode = localStorage.getItem("theme");
-    const isLight = themeCode === "light";
+    const isLight = themeCode === "light" || "dark";
     setMode(isLight);
     setTheme(isLight ? "light" : "dark");
   }, []); // Empty dependency: run once on mount
