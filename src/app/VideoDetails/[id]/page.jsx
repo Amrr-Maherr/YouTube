@@ -34,7 +34,7 @@ function Page() {
   useEffect(() => {
     if (videoDetails?.length > 0) {
       const channelId = videoDetails[0]?.snippet?.channelId;
-      const query = videoDetails[0]?.snippet?.title.slice(0, 10);
+      const query = videoDetails[0]?.snippet?.title.slice(0, 20);
       dispatch(FetchChannelDetails(channelId));
       dispatch(FetchRelatedVideos(query));
     }
