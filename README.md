@@ -120,30 +120,145 @@ Users can browse videos, search for content, view video details, read comments, 
 ## 📁 Project Structure
 
 ```bash
-youtube/
-├── app/
-│   ├── globals.css
-│   ├── layout.js
-│   ├── page.js
-│   ├── search/
-│   └── video/[id]/
-├── components/
-│   ├── ui/
-│   ├── VideoCard.js
-│   └── Player.js
-├── lib/
-│   ├── api.js
-│   └── utils.js
-├── store/
-│   ├── videoSlice.js
-│   └── store.js
-├── public/
-│   ├── screenshots/
-│   └── icons/
-├── .env.example
-├── next.config.js
-├── tailwind.config.js
-└── package.json
+├── 📁 .git/ 🚫 (auto-hidden)
+├── 📁 .next/ 🚫 (auto-hidden)
+├── 📁 node_modules/ 🚫 (auto-hidden)
+├── 📁 public/
+│   ├── 📁 assets/
+│   │   ├── 📁 icons/
+│   │   │   ├── 🖼️ Logo.svg
+│   │   │   └── 🖼️ YouTube-Logo-2017.png
+│   │   └── 📁 images/
+│   │       └── 🖼️ monkey.png
+│   ├── 📁 screenshots/
+│   │   ├── 🖼️ channel.png
+│   │   ├── 🖼️ dark-mode.png
+│   │   ├── 🖼️ home.png
+│   │   ├── 🖼️ mobile.png
+│   │   ├── 🖼️ search.png
+│   │   ├── 🖼️ sidebar.png
+│   │   └── 🖼️ video.png
+│   └── 🖼️ favicon.ico
+├── 📁 src/
+│   ├── 📁 Providers/
+│   │   ├── 📄 Providers.jsx
+│   │   └── 📄 ThemeProvider.jsx
+│   ├── 📁 Store/
+│   │   ├── 📄 ChannelSlice.js
+│   │   ├── 📄 ChannelVideosSlice.js
+│   │   ├── 📄 I18nSlice.js
+│   │   ├── 📄 MostPopularVideosSlice.js
+│   │   ├── 📄 PlaylistSlice.js
+│   │   ├── 📄 RelatedVideosSlice.js
+│   │   ├── 📄 SearchVideosSlice.js
+│   │   ├── 📄 VideoCommentsSlice.js
+│   │   ├── 📄 VideoDetailsSlice.js
+│   │   ├── 📄 categoriesSlice.js
+│   │   └── 📄 index.js
+│   ├── 📁 app/
+│   │   ├── 📁 Channel/
+│   │   │   ├── 📁 Elements/
+│   │   │   │   ├── 📄 BannerComponent.jsx
+│   │   │   │   ├── 📄 ChannelDescriptionComponent.jsx
+│   │   │   │   ├── 📄 ChannelInfoComponent.jsx
+│   │   │   │   ├── 📄 ChannelPageSkeleton.jsx
+│   │   │   │   ├── 📄 ChannelPlayLists.jsx
+│   │   │   │   ├── 📄 ChannelTabs.jsx
+│   │   │   │   ├── 📄 ChannelVideosSection.jsx
+│   │   │   │   ├── 📄 HomeTab.jsx
+│   │   │   │   └── 📄 PlaylistVideoCard.jsx
+│   │   │   └── 📁 [id]/
+│   │   │       └── 📄 page.jsx
+│   │   ├── 📁 Main/
+│   │   │   ├── 📁 Elements/
+│   │   │   │   └── 📄 HomeVideosList.jsx
+│   │   │   └── 📄 page.jsx
+│   │   ├── 📁 SearchResult/
+│   │   │   ├── 📁 Elements/
+│   │   │   │   ├── 📄 SearchResultCard.jsx
+│   │   │   │   ├── 📄 VideoInfo.jsx
+│   │   │   │   └── 📄 VideoThumbnail.jsx
+│   │   │   └── 📄 page.jsx
+│   │   ├── 📁 Settings/
+│   │   │   ├── 📁 Elements/
+│   │   │   │   ├── 📄 SettingsCard.jsx
+│   │   │   │   └── 📄 ThemeButton.jsx
+│   │   │   └── 📄 page.jsx
+│   │   ├── 📁 VideoDetails/
+│   │   │   ├── 📁 Comments/
+│   │   │   │   ├── 📄 AvatarSection.jsx
+│   │   │   │   ├── 📄 CommentActions.jsx
+│   │   │   │   ├── 📄 CommentContent.jsx
+│   │   │   │   ├── 📄 CommentInput.jsx
+│   │   │   │   ├── 📄 CommentItem.jsx
+│   │   │   │   └── 📄 VideoComments.jsx
+│   │   │   ├── 📁 Elements/
+│   │   │   │   ├── 📄 ChannelAvatar.jsx
+│   │   │   │   ├── 📄 VideoCommentsHeader.jsx
+│   │   │   │   ├── 📄 VideoDescription.jsx
+│   │   │   │   ├── 📄 VideoDetailsCard.jsx
+│   │   │   │   ├── 📄 VideoHeader.jsx
+│   │   │   │   ├── 📄 VideoStats.jsx
+│   │   │   │   ├── 📄 VideoTags.jsx
+│   │   │   │   └── 📄 VideoThumbnail.jsx
+│   │   │   └── 📁 [id]/
+│   │   │       └── 📄 page.jsx
+│   │   ├── 🎨 globals.css
+│   │   ├── 📄 layout.js
+│   │   ├── 📄 not-found.jsx
+│   │   └── 📄 page.js
+│   ├── 📁 assets/
+│   │   ├── 📁 icons/
+│   │   └── 📁 images/
+│   ├── 📁 components/
+│   │   ├── 📁 LoadingSkeleton/
+│   │   │   ├── 📄 SearchResultCardLoader.jsx
+│   │   │   ├── 📄 VideoDetailsSkeleton.jsx
+│   │   │   └── 📄 VideoSkeleton.jsx
+│   │   ├── 📁 Navbar/
+│   │   │   ├── 📁 Elements/
+│   │   │   │   ├── 📄 CategoriesNav.jsx
+│   │   │   │   ├── 📄 Logo.jsx
+│   │   │   │   ├── 📄 NavDrawer.jsx
+│   │   │   │   ├── 📄 SearchBar.jsx
+│   │   │   │   ├── 📄 SearchResult.jsx
+│   │   │   │   ├── 📄 SearchResultMenu.jsx
+│   │   │   │   ├── 📄 SearchResultSkeleton.jsx
+│   │   │   │   └── 📄 UserActions.jsx
+│   │   │   └── 📄 Navbar.jsx
+│   │   ├── 📁 Slider/
+│   │   │   └── 📄 Slider.jsx
+│   │   ├── 📁 VideoCard/
+│   │   │   ├── 📁 Elements/
+│   │   │   │   ├── 📄 VideoActions.jsx
+│   │   │   │   ├── 📄 VideoInfo.jsx
+│   │   │   │   └── 📄 VideoThumbnail.jsx
+│   │   │   └── 📄 Index.jsx
+│   │   └── 📁 ui/
+│   │       ├── 📄 avatar.jsx
+│   │       ├── 📄 button.jsx
+│   │       ├── 📄 card.jsx
+│   │       ├── 📄 input.jsx
+│   │       ├── 📄 select.jsx
+│   │       ├── 📄 sheet.jsx
+│   │       ├── 📄 switch.jsx
+│   │       ├── 📄 tabs.jsx
+│   │       └── 📄 tooltip.jsx
+│   ├── 📁 hooks/
+│   │   └── 📄 useVideoTitle.jsx
+│   └── 📁 lib/
+│       └── 📄 utils.js
+├── 📄 .env.local 🚫 (auto-hidden)
+├── 🚫 .gitignore
+├── 📖 README.md
+├── 📄 components.json
+├── 📄 eslint.config.mjs
+├── 📄 jsconfig.json
+├── 📄 next.config.mjs
+├── 📄 package-lock.json
+├── 📄 package.json
+├── 📄 postcss.config.mjs
+└── 📄 tailwind.config.js
 ```
 
 ---
