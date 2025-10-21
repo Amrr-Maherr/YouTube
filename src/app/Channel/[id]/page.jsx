@@ -61,9 +61,8 @@ export default function Page() {
   const viewCount = Number(statistics?.viewCount).toLocaleString();
 
   return (
-    <div className="w-full">
+    <div className="container mx-auto">
       {banner && <BannerComponent bannerUrl={banner} />}
-      <div className="container mx-auto">
         <ChannelInfoComponent
           thumbnail={thumbnail}
           title={title}
@@ -78,7 +77,6 @@ export default function Page() {
           description={description}
           loading={loading}
         />
-      </div>
     </div>
   );
 }
