@@ -3,6 +3,7 @@ import "./globals.css";
 import Providers from "@/Providers/Providers";
 import { ThemeProvider} from "next-themes";
 import Navbar from "@/components/Navbar/Navbar";
+import GoogleProvider from "@/Providers/GoogleProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,10 +33,12 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <Providers>
-            <Navbar />
-            {children}
-          </Providers>
+          <GoogleProvider>
+            <Providers>
+              <Navbar />
+              {children}
+            </Providers>
+          </GoogleProvider>
         </ThemeProvider>
       </body>
     </html>

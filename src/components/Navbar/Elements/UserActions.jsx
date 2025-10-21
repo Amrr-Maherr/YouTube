@@ -6,6 +6,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import Link from "next/link";
 const UserActions = () => {
   return (
     <div className=" hidden md:flex items-center gap-5">
@@ -30,15 +31,17 @@ const UserActions = () => {
         </TooltipTrigger>
         <TooltipContent>notification</TooltipContent>
       </Tooltip>
-      <Avatar className="cursor-pointer">
-        <AvatarImage
-          src="https://github.com/shadcn.png"
-          className="w-[32px] h-[32px] rounded-full"
-        />
-        <AvatarFallback className="bg-gray-700 text-[var(--foreground)]">
-          CN
-        </AvatarFallback>
-      </Avatar>
+      <Link href="/Profile">
+        <Avatar className="cursor-pointer">
+          <AvatarImage
+            src="https://github.com/shadcn.png"
+            className="w-[32px] h-[32px] rounded-full"
+          />
+          <AvatarFallback className="bg-gray-700 text-[var(--foreground)]">
+            CN
+          </AvatarFallback>
+        </Avatar>
+      </Link>
     </div>
   );
 };
