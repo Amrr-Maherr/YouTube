@@ -1,3 +1,4 @@
+"use client"
 import { Bell } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Plus } from "lucide-react";
@@ -7,7 +8,18 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 const UserActions = () => {
+  const [image,setImage] = useState(null)
+  useEffect(() => {
+    const userData = JSON.parse(localStorage.getItem("userData"))
+    if (userData) {
+      const userImage = userData?.picture;
+      setImage(userImage)
+    } else {
+      setImage(null)
+    }
+  },[])
   return (
     <div className=" hidden md:flex items-center gap-5">
       <Tooltip>
@@ -34,7 +46,7 @@ const UserActions = () => {
       <Link href="/Profile">
         <Avatar className="cursor-pointer">
           <AvatarImage
-            src="https://github.com/shadcn.png"
+            src={image}
             className="w-[32px] h-[32px] rounded-full"
           />
           <AvatarFallback className="bg-gray-700 text-[var(--foreground)]">
