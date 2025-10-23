@@ -1,32 +1,63 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import GoogleLoginButton from "@/components/ui/GoogleLoginButton";
-import { jwtDecode } from "jwt-decode";
 
 export default function Profile() {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  const handleGoogleLogin = (credentialResponse) => {
-    const decoded = jwtDecode(credentialResponse.credential);
-    console.log("decoded:", decoded);
-    if (decoded) {
-      localStorage.setItem("userData", JSON.stringify(decoded));
+  useEffect(() => {
+    const saved = localStorage.getItem("userData");
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        setUser(parsed);
+      } catch (e) {
+        console.error("Failed to parse userData:", e);
+        localStorage.removeItem("userData");
+      }
     }
-    setUser({
-      token: credentialResponse.credential,
-      email: decoded.email,
-      name: decoded.name || `${decoded.given_name} ${decoded.family_name}`,
-      picture: decoded.picture,
-    });
+    setLoading(false);
+  }, []);
+
+  const handleGoogleLogin = async (credentialResponse) => {
+    try {
+      console.log("Google Response:", credentialResponse);
+
+      const accessToken = credentialResponse.access_token;
+      if (!accessToken) {
+        console.error("No access token found");
+        return;
+      }
+
+      const res = await fetch("https://www.googleapis.com/oauth2/v3/userinfo", {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      });
+      const userInfo = await res.json();
+      console.log("User Info:", userInfo);
+
+      localStorage.setItem("userData", JSON.stringify(userInfo));
+      setUser(userInfo);
+    } catch (error) {
+      console.error("Error fetching user info:", error);
+    }
   };
 
   const handleLogout = () => {
     setUser(null);
     localStorage.removeItem("userData");
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p className="text-slate-500 dark:text-slate-400">Loading…</p>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-black text-slate-900 dark:text-slate-100 py-8">
@@ -48,9 +79,7 @@ export default function Profile() {
               </AvatarFallback>
             </Avatar>
             <div className="space-y-1">
-              <h1 className="text-2xl font-bold">
-                {user && user.name}
-              </h1>
+              <h1 className="text-2xl font-bold">{user?.name || "Guest"}</h1>
               <p className="text-sm text-slate-500 dark:text-slate-400">
                 {user ? user.email : "Not logged in"}
               </p>
@@ -128,7 +157,7 @@ export default function Profile() {
           </CardContent>
         </Card>
 
-        {/* Family Center */}
+        {/* Family Center Section */}
         <Card className="border border-slate-200 bg-black dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow">
           <CardContent className="p-6">
             <h2 className="font-bold text-xl text-slate-900 dark:text-slate-100 mb-3">
@@ -153,16 +182,24 @@ export default function Profile() {
             <h2 className="font-bold text-xl text-slate-900 dark:text-slate-100 mb-3">
               Subscription
             </h2>
-            <p className="text-sm text-slate-600 dark:text-slate-300 mb-2">
-              You don’t have a subscription | Get YouTube Premium
-            </p>
-            <p className="text-sm text-slate-500 dark:text-slate-400 mb-4 leading-relaxed">
-              YouTube Premium lets you listen to music uninterrupted, watch
-              videos without ads, and enjoy other features.
-            </p>
-            <Button className="bg-[#065fd4] hover:bg-[#065fd4]/90 text-white px-6 py-2 rounded-lg font-medium">
-              Get Premium
-            </Button>
+            {user ? (
+              <>
+                <p className="text-sm text-slate-600 dark:text-slate-300 mb-2">
+                  You don’t have a subscription | Get YouTube Premium
+                </p>
+                <p className="text-sm text-slate-500 dark:text-slate-400 mb-4 leading-relaxed">
+                  YouTube Premium lets you listen to music uninterrupted, watch
+                  videos without ads, and enjoy other features.
+                </p>
+                <Button className="bg-[#065fd4] hover:bg-[#065fd4]/90 text-white px-6 py-2 rounded-lg font-medium">
+                  Get Premium
+                </Button>
+              </>
+            ) : (
+              <p className="text-sm text-slate-500 dark:text-slate-400">
+                Please sign in to see subscription options.
+              </p>
+            )}
           </CardContent>
         </Card>
       </div>
