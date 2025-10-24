@@ -4,13 +4,16 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import GoogleLoginButton from "@/components/ui/GoogleLoginButton";
+import { useDispatch } from "react-redux";
+import { logOut, setUserData } from "@/Store/userInfoSlice";
 
 export default function Profile() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    const saved = localStorage.getItem("userData");
+    const saved = localStorage.getItem("user");
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
@@ -38,9 +41,10 @@ export default function Profile() {
       });
       const userInfo = await res.json();
       console.log("User Info:", userInfo);
-
-      localStorage.setItem("userData", JSON.stringify(userInfo));
       setUser(userInfo);
+      if (userInfo) {
+        dispatch(setUserData(userInfo));
+      }
     } catch (error) {
       console.error("Error fetching user info:", error);
     }
@@ -48,7 +52,7 @@ export default function Profile() {
 
   const handleLogout = () => {
     setUser(null);
-    localStorage.removeItem("userData");
+    dispatch(logOut());
   };
 
   if (loading) {
@@ -63,7 +67,7 @@ export default function Profile() {
     <div className="min-h-screen bg-slate-50 dark:bg-black text-slate-900 dark:text-slate-100 py-8">
       <div className="container mx-auto px-6 space-y-8">
         {/* Header */}
-        <div className="flex items-center justify-between flex-wrap">
+        <div className="flex items-center justify-between flex-wrap gap-5">
           <div className="flex items-center gap-6">
             <Avatar className="w-24 h-24">
               <AvatarImage
@@ -111,7 +115,7 @@ export default function Profile() {
               channel to upload your videos, comment, or create playlists.
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
-              <Button className="bg-[#065fd4] hover:bg-[#065fd4]/90 text-white px-6 py-2 rounded-lg font-medium flex-1 sm:flex-none">
+              <Button className="bg-red-500 hover:bg-red-800 cursor-pointer text-white px-6 py-2 rounded-lg font-medium flex-1 sm:flex-none">
                 Your Channel
               </Button>
               <Button
@@ -146,7 +150,7 @@ export default function Profile() {
               Your Google account is used to sign in to YouTube.
             </p>
             {user ? (
-              <Button className="bg-[#065fd4] hover:bg-[#065fd4]/90 text-white px-6 py-2 rounded-lg font-medium">
+              <Button className="bg-red-500 hover:bg-red-800 cursor-pointer text-white px-6 py-2 rounded-lg font-medium">
                 Manage Google Account
               </Button>
             ) : (
@@ -191,7 +195,7 @@ export default function Profile() {
                   YouTube Premium lets you listen to music uninterrupted, watch
                   videos without ads, and enjoy other features.
                 </p>
-                <Button className="bg-[#065fd4] hover:bg-[#065fd4]/90 text-white px-6 py-2 rounded-lg font-medium">
+                <Button className="bg-red-500 hover:bg-red-800 cursor-pointer text-white px-6 py-2 rounded-lg font-medium">
                   Get Premium
                 </Button>
               </>
