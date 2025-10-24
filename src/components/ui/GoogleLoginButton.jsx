@@ -7,6 +7,7 @@ export default function GoogleLoginButton({ onSuccess }) {
   const login = useGoogleLogin({
     onSuccess,
     onError: () => console.log("Login Failed"),
+    redirect_uri: "https://you-tube-orpin-xi.vercel.app/Profile",
   });
 
   return (

@@ -63,7 +63,7 @@ export default function Profile() {
     <div className="min-h-screen bg-slate-50 dark:bg-black text-slate-900 dark:text-slate-100 py-8">
       <div className="container mx-auto px-6 space-y-8">
         {/* Header */}
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between flex-wrap">
           <div className="flex items-center gap-6">
             <Avatar className="w-24 h-24">
               <AvatarImage
@@ -85,7 +85,7 @@ export default function Profile() {
               </p>
             </div>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 md:mx-0 mx-auto">
             {!user ? (
               <GoogleLoginButton onSuccess={handleGoogleLogin} />
             ) : (
