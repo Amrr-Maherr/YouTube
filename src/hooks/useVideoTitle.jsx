@@ -2,12 +2,12 @@
 
 import { useEffect } from "react";
 
-export default function useVideoTitle(videoDetails) {
+export default function useVideoTitle(title) {
   useEffect(() => {
-    if (videoDetails?.length > 0) {
-      document.title = videoDetails[0].snippet.title;
+    if (title) {
+      document.title = title;
     } else {
       document.title = "YouTube";
     }
-  }, [videoDetails]);
+  }, [title]);
 }

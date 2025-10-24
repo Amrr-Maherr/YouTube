@@ -3,7 +3,7 @@ import VideoDetailsSkeleton from "@/components/LoadingSkeleton/VideoDetailsSkele
 import { FetchRelatedVideos } from "@/Store/RelatedVideosSlice";
 import { FetchVideoDetails } from "@/Store/VideoDetailsSlice";
 import { useParams } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import VideoDetailsCard from "../Elements/VideoDetailsCard";
 import { FetchChannelDetails } from "@/Store/ChannelSlice";
@@ -21,6 +21,7 @@ function Page() {
   const loading = useSelector((state) => state.VideoDetails.loading);
   const error = useSelector((state) => state.VideoDetails.error);
   const dispatch = useDispatch();
+  const [title,setTitle] = useState("")
 
   useEffect(() => {
     if (id) {
@@ -29,16 +30,20 @@ function Page() {
       dispatch(FetchVideoComments(id));
     }
   }, [id, dispatch]);
-  console.log(RelatedVideos, "RelatedVideos");
-  useVideoTitle(videoDetails);
+
   useEffect(() => {
     if (videoDetails?.length > 0) {
       const channelId = videoDetails[0]?.snippet?.channelId;
       const query = videoDetails[0]?.snippet?.title.slice(0, 20);
+      const queryTitle = videoDetails[0]?.snippet?.title;
+      setTitle(queryTitle);
+      console.log(queryTitle, "queryTitle");
       dispatch(FetchChannelDetails(channelId));
       dispatch(FetchRelatedVideos(query));
     }
-  }, [videoDetails, dispatch,id]);
+  }, [videoDetails, dispatch, id]);
+  
+  useVideoTitle(title);
   if (loading) {
     return <VideoDetailsSkeleton />;
   }

@@ -1,19 +1,16 @@
 "use client";
 import { FetchChannelDetails } from "@/Store/ChannelSlice";
 import { useParams } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import BannerComponent from "../Elements/BannerComponent";
 import ChannelInfoComponent from "../Elements/ChannelInfoComponent";
-import ChannelDescriptionComponent from "../Elements/ChannelDescriptionComponent";
 import ChannelPageSkeleton from "../Elements/ChannelPageSkeleton";
 import { FetchChannelVideos } from "@/Store/ChannelVideosSlice";
 import { FetchPlaylistItems } from "@/Store/PlaylistSlice";
-import PlaylistVideoCard from "../Elements/PlaylistVideoCard";
-import VideoCard from "../../../components/VideoCard/Index";
-import ChannelPlayLists from "../Elements/ChannelPlayLists";
-import ChannelVideosSection from "../Elements/ChannelVideosSection";
 import ChannelTabs from "../Elements/ChannelTabs";
+import useVideoTitle from "@/hooks/useVideoTitle";
+
 export default function Page() {
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -22,11 +19,12 @@ export default function Page() {
   const ChannelPlayList = useSelector((state) => state.Playlist.data);
   const error = useSelector((state) => state.error);
   const loading = useSelector((state) => state.loading);
-
+  
   useEffect(() => {
     if (id) dispatch(FetchChannelDetails(id));
   }, [id, dispatch]);
 
+  // Fetch channel videos & playlists
   useEffect(() => {
     if (Channel && Channel.length > 0) {
       const uploadsPlaylistId =
@@ -38,18 +36,11 @@ export default function Page() {
     }
   }, [Channel, dispatch]);
 
-  console.log(ChannelVideos, "ChannelVideos");
-  console.log(ChannelPlayList, "ChannelPlayList");
-
-  if (loading) return <ChannelPageSkeleton />;
-  if (error) return <p className="text-center mt-10 text-red-500">{error}</p>;
-  if (!Channel)
-    return <p className="text-center mt-10 text-gray-500">No channel data</p>;
-
-  const channelData = Channel[0];
-  const snippet = channelData.snippet;
-  const statistics = channelData.statistics;
-  const branding = channelData.brandingSettings;
+  // Extract channel info
+  const channelData = Channel?.[0];
+  const snippet = channelData?.snippet;
+  const statistics = channelData?.statistics;
+  const branding = channelData?.brandingSettings;
 
   const banner = branding?.image?.bannerExternalUrl;
   const title = branding?.channel?.title;
@@ -60,23 +51,30 @@ export default function Page() {
   const videoCount = Number(statistics?.videoCount).toLocaleString();
   const viewCount = Number(statistics?.viewCount).toLocaleString();
 
+  useVideoTitle(title);
+  // Handle states
+  if (loading) return <ChannelPageSkeleton />;
+  if (error) return <p className="text-center mt-10 text-red-500">{error}</p>;
+  if (!Channel)
+    return <p className="text-center mt-10 text-gray-500">No channel data</p>;
+
   return (
     <div className="container mx-auto">
       {banner && <BannerComponent bannerUrl={banner} />}
-        <ChannelInfoComponent
-          thumbnail={thumbnail}
-          title={title}
-          customUrl={customUrl}
-          subscriberCount={subscriberCount}
-          videoCount={videoCount}
-          viewCount={viewCount}
-        />
-        <ChannelTabs
-          ChannelVideos={ChannelVideos}
-          ChannelPlayList={ChannelPlayList}
-          description={description}
-          loading={loading}
-        />
+      <ChannelInfoComponent
+        thumbnail={thumbnail}
+        title={title}
+        customUrl={customUrl}
+        subscriberCount={subscriberCount}
+        videoCount={videoCount}
+        viewCount={viewCount}
+      />
+      <ChannelTabs
+        ChannelVideos={ChannelVideos}
+        ChannelPlayList={ChannelPlayList}
+        description={description}
+        loading={loading}
+      />
     </div>
   );
 }
