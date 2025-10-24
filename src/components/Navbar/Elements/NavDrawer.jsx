@@ -18,6 +18,7 @@ import {
   Music,
   Gamepad2,
   Settings,
+  User,
 } from "lucide-react";
 import Link from "next/link";
 import Logo from "./Logo";
@@ -113,7 +114,16 @@ export default function NavDrawer() {
         </nav>
 
         <div className="my-3 border-t border-[#303030]" />
+        {/* Divider before Profile */}
 
+        <Link
+          href="/Profile"
+          className="flex items-center gap-6 px-4 py-2 rounded-lg hover:bg-[var(--background)] text-sm"
+        >
+          <User size={22} />
+          <span>Profile</span>
+        </Link>
+        <div className="my-2 border-t border-[#303030]" />
         <nav className="flex flex-col">
           <Link
             href="/Settings"
