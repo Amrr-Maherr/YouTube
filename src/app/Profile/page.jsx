@@ -64,15 +64,13 @@ export default function Profile() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-black text-slate-900 dark:text-slate-100 py-8">
+    <div className="min-h-screen bg-white dark:bg-[var(--background)] text-slate-900 dark:text-slate-100 py-8">
       <div className="container mx-auto px-6 space-y-8">
         {/* Header */}
         <div className="flex items-center justify-between flex-wrap gap-5">
           <div className="flex items-center gap-6">
             <Avatar className="w-24 h-24">
-              <AvatarImage
-                src={user?.picture || "https://i.pravatar.cc/150?img=12"}
-              />
+              <AvatarImage src={user?.picture || ""} />
               <AvatarFallback className="bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300 font-semibold">
                 {user
                   ? user.name
@@ -105,7 +103,7 @@ export default function Profile() {
         </div>
 
         {/* Your Channel Section */}
-        <Card className="border border-slate-200 dark:border-slate-700 bg-black shadow-sm hover:shadow-md transition-shadow">
+        <Card className="border border-slate-200 dark:border-slate-700 bg-[var(--background)] shadow-sm hover:shadow-md transition-shadow">
           <CardContent className="p-6">
             <h2 className="font-bold text-xl text-slate-900 dark:text-slate-100 mb-3">
               Your YouTube Channel
@@ -141,7 +139,7 @@ export default function Profile() {
         </Card>
 
         {/* Account Section */}
-        <Card className="border border-slate-200 bg-black dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow">
+        <Card className="border border-slate-200 bg-[var(--background)] dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow">
           <CardContent className="p-6">
             <h2 className="font-bold text-xl text-slate-900 dark:text-slate-100 mb-3">
               Account
@@ -162,7 +160,7 @@ export default function Profile() {
         </Card>
 
         {/* Family Center Section */}
-        <Card className="border border-slate-200 bg-black dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow">
+        <Card className="border border-slate-200 bg-[var(--background)] dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow">
           <CardContent className="p-6">
             <h2 className="font-bold text-xl text-slate-900 dark:text-slate-100 mb-3">
               Family Center
@@ -181,7 +179,7 @@ export default function Profile() {
         </Card>
 
         {/* Subscription Section */}
-        <Card className="border border-slate-200 bg-black dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow">
+        <Card className="border border-slate-200 bg-[var(--background)] dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow">
           <CardContent className="p-6">
             <h2 className="font-bold text-xl text-slate-900 dark:text-slate-100 mb-3">
               Subscription
