@@ -20,6 +20,8 @@ useEffect(() => {
     setImage(userData.picture);
   } else if (state.data?.picture) {
     setImage(state.data.picture);
+  } else {
+    setImage("")
   }
 }, [state.data]);
 
