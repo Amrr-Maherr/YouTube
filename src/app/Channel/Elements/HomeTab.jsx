@@ -2,8 +2,6 @@
 
 import VideoCard from "@/components/organisms/VideoCard/Index";
 import PlaylistVideoCard from "./PlaylistVideoCard";
-import VideoDetailsCard from "../Elements/VideoDetailsCard";
-import VideoThumbnail from "../Elements/VideoThumbnail";
 
 export default function HomeTab({
   ChannelVideos,
