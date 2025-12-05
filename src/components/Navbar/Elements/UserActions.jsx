@@ -9,21 +9,17 @@ import {
 } from "@/components/ui/tooltip";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 const UserActions = () => {
   const [image, setImage] = useState(null)
-  const state = useSelector((state) => state.userInfo);
-  
-useEffect(() => {
-  const userData = JSON.parse(localStorage.getItem("user"));
-  if (userData) {
-    setImage(userData.picture);
-  } else if (state.data?.picture) {
-    setImage(state.data.picture);
-  } else {
-    setImage("")
-  }
-}, [state.data]);
+
+  useEffect(() => {
+    const userData = JSON.parse(localStorage.getItem("user"));
+    if (userData) {
+      setImage(userData.picture);
+    } else {
+      setImage("")
+    }
+  }, []);
 
   return (
     <div className=" hidden md:flex items-center gap-5">

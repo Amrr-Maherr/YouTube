@@ -1,22 +1,25 @@
-"use client"
-import { useSelector } from "react-redux";
+"use client";
+import { useSearchParams } from "next/navigation";
+import { useSearchVideos } from "@/hooks/useSearchVideos";
 import SearchResultCard from "./Elements/SearchResultCard";
 import SearchResultCardLoader from "@/components/LoadingSkeleton/SearchResultCardLoader";
-function page() {
-    const SearchResult = useSelector((state) => state.SearchVideos.data);
-    const loading = useSelector((state) => state.SearchVideos.loading);
+
+function Page() {
+  const searchParams = useSearchParams();
+  const query = searchParams.get("q");
+  const { data: SearchResult, isLoading: loading } = useSearchVideos(query);
+
   if (loading) {
-    return (
-        <SearchResultCardLoader/>
-      )
-    }
-    return (
-      <section className="container mx-auto">
-        {SearchResult.map((video) => (
-          <SearchResultCard video={video} key={video.id.videoId} />
-        ))}
-      </section>
-    );
+    return <SearchResultCardLoader />;
+  }
+
+  return (
+    <section className="container mx-auto">
+      {SearchResult?.map((video) => (
+        <SearchResultCard video={video} key={video.id.videoId} />
+      ))}
+    </section>
+  );
 }
 
-export default page
+export default Page;

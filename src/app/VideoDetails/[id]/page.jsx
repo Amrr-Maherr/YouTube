@@ -1,47 +1,35 @@
 "use client";
 import VideoDetailsSkeleton from "@/components/LoadingSkeleton/VideoDetailsSkeleton";
-import { FetchRelatedVideos } from "@/Store/RelatedVideosSlice";
-import { FetchVideoDetails } from "@/Store/VideoDetailsSlice";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import VideoDetailsCard from "../Elements/VideoDetailsCard";
-import { FetchChannelDetails } from "@/Store/ChannelSlice";
-import { FetchVideoComments } from "@/Store/VideoCommentsSlice";
 import VideoComments from "../Comments/VideoComments";
-import { FetchMostPopularVideos } from "@/Store/MostPopularVideosSlice";
 import VideoCard from "../../../components/VideoCard/Index";
 import useVideoTitle from "@/hooks/useVideoTitle";
+import { useVideoDetails } from "@/hooks/useVideoDetails";
+import { useChannelDetails } from "@/hooks/useChannelDetails";
+import { useVideoComments } from "@/hooks/useVideoComments";
+import { useRelatedVideos } from "@/hooks/useRelatedVideos";
+import { useMostPopularVideos } from "@/hooks/useMostPopularVideos";
 function Page() {
   const { id } = useParams();
-  const videoDetails = useSelector((state) => state.VideoDetails.data);
-  const RelatedVideos = useSelector((state) => state.RelatedVideos.data);
-  const Comments = useSelector((state) => state.VideoComments.data);
-  const ChannelDetails = useSelector((state) => state.Channel.data);
-  const loading = useSelector((state) => state.VideoDetails.loading);
-  const error = useSelector((state) => state.VideoDetails.error);
-  const dispatch = useDispatch();
-  const [title,setTitle] = useState("")
+  const { data: videoDetails, isLoading: loading, error } = useVideoDetails(id);
+  const [title, setTitle] = useState("");
+
+  const channelId = videoDetails?.length > 0 ? videoDetails[0]?.snippet?.channelId : null;
+  const query = videoDetails?.length > 0 ? videoDetails[0]?.snippet?.title.slice(0, 20) : null;
+  const queryTitle = videoDetails?.length > 0 ? videoDetails[0]?.snippet?.title : null;
+
+  const { data: RelatedVideos = [] } = useRelatedVideos(query);
+  const { data: Comments } = useVideoComments(id);
+  const { data: ChannelDetails } = useChannelDetails(channelId);
 
   useEffect(() => {
-    if (id) {
-      dispatch(FetchMostPopularVideos({}));
-      dispatch(FetchVideoDetails(id));
-      dispatch(FetchVideoComments(id));
-    }
-  }, [id, dispatch]);
-
-  useEffect(() => {
-    if (videoDetails?.length > 0) {
-      const channelId = videoDetails[0]?.snippet?.channelId;
-      const query = videoDetails[0]?.snippet?.title.slice(0, 20);
-      const queryTitle = videoDetails[0]?.snippet?.title;
+    if (queryTitle) {
       setTitle(queryTitle);
       console.log(queryTitle, "queryTitle");
-      dispatch(FetchChannelDetails(channelId));
-      dispatch(FetchRelatedVideos(query));
     }
-  }, [videoDetails, dispatch, id]);
+  }, [queryTitle]);
   
   useVideoTitle(title);
   if (loading) {

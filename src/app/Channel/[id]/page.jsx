@@ -1,40 +1,24 @@
 "use client";
-import { FetchChannelDetails } from "@/Store/ChannelSlice";
 import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import BannerComponent from "../Elements/BannerComponent";
 import ChannelInfoComponent from "../Elements/ChannelInfoComponent";
 import ChannelPageSkeleton from "../Elements/ChannelPageSkeleton";
-import { FetchChannelVideos } from "@/Store/ChannelVideosSlice";
-import { FetchPlaylistItems } from "@/Store/PlaylistSlice";
 import ChannelTabs from "../Elements/ChannelTabs";
 import useVideoTitle from "@/hooks/useVideoTitle";
+import { useChannelDetails } from "@/hooks/useChannelDetails";
+import { useChannelVideos } from "@/hooks/useChannelVideos";
+import { usePlaylistItems } from "@/hooks/usePlaylistItems";
 
 export default function Page() {
   const { id } = useParams();
-  const dispatch = useDispatch();
-  const Channel = useSelector((state) => state.Channel.data);
-  const ChannelVideos = useSelector((state) => state.ChannelVideos.data);
-  const ChannelPlayList = useSelector((state) => state.Playlist.data);
-  const error = useSelector((state) => state.error);
-  const loading = useSelector((state) => state.loading);
-  
-  useEffect(() => {
-    if (id) dispatch(FetchChannelDetails(id));
-  }, [id, dispatch]);
+  const { data: Channel, isLoading: channelLoading, error: channelError } = useChannelDetails(id);
 
-  // Fetch channel videos & playlists
-  useEffect(() => {
-    if (Channel && Channel.length > 0) {
-      const uploadsPlaylistId =
-        Channel[0]?.contentDetails?.relatedPlaylists?.uploads;
-      if (uploadsPlaylistId) {
-        dispatch(FetchChannelVideos(uploadsPlaylistId));
-        dispatch(FetchPlaylistItems(uploadsPlaylistId));
-      }
-    }
-  }, [Channel, dispatch]);
+  const uploadsPlaylistId = Channel?.[0]?.contentDetails?.relatedPlaylists?.uploads;
+  const { data: ChannelVideos, isLoading: videosLoading } = useChannelVideos(uploadsPlaylistId);
+  const { data: ChannelPlayList, isLoading: playlistLoading } = usePlaylistItems(uploadsPlaylistId);
+
+  const loading = channelLoading || videosLoading || playlistLoading;
+  const error = channelError;
 
   // Extract channel info
   const channelData = Channel?.[0];

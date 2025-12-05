@@ -1,18 +1,9 @@
 "use client";
 import Slider from "@/components/Slider/Slider";
-import { FetchCategories } from "@/Store/categoriesSlice";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useCategories } from "@/hooks/useCategories";
 
 function CategoriesNav() {
-  const dispatch = useDispatch();
-  const Data = useSelector((state) => state.Categories.data.items) || [];
-  const error = useSelector((state) => state.Categories.error);
-  const loading = useSelector((state) => state.Categories.loading);
-
-  useEffect(() => {
-    dispatch(FetchCategories());
-  }, [dispatch]);
+  const { data: Data = [], error, isLoading: loading } = useCategories();
   
 console.log(Data,"data");
 

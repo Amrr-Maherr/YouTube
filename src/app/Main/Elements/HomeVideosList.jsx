@@ -1,30 +1,20 @@
 "use client";
-import { FetchMostPopularVideos } from "@/Store/MostPopularVideosSlice";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useMostPopularVideos } from "@/hooks/useMostPopularVideos";
 import VideoCard from "../../../components/VideoCard/Index";
 import { VideoSkeletonList } from "@/components/LoadingSkeleton/VideoSkeleton";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 function HomeVideosList() {
-  const Videos = useSelector((state) => state.MostPopularVideos.data);
-  const error = useSelector((state) => state.MostPopularVideos.error);
-  const loading = useSelector((state) => state.MostPopularVideos.loading);
-  const nextPageToken = useSelector(
-    (state) => state.MostPopularVideos.nextPageToken
-  );
+  const {
+    data,
+    error,
+    isLoading: loading,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useMostPopularVideos({});
 
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(FetchMostPopularVideos({}));
-  }, [dispatch]);
-
-  const fetchMore = () => {
-    if (nextPageToken) {
-      dispatch(FetchMostPopularVideos({ pageToken: nextPageToken }));
-    }
-  };
+  const Videos = data?.pages.flatMap(page => page.items) || [];
 
   return (
     <section className="container py-2 mx-auto">
@@ -33,8 +23,8 @@ function HomeVideosList() {
       ) : (
         <InfiniteScroll
           dataLength={Videos.length}
-          next={fetchMore}
-          hasMore={!!nextPageToken}
+          next={fetchNextPage}
+          hasMore={hasNextPage}
           loader={<VideoSkeletonList />}
           endMessage={
             <p className="text-center text-gray-400 mt-4">
