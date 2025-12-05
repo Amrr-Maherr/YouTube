@@ -5,7 +5,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@/components/atoms/ui/select";
 
 export default function VideoCommentsHeader({ commentCount }) {
   return (

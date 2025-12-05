@@ -1,6 +1,6 @@
 "use client";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
-import VideoCard from "@/components/VideoCard/Index";
+import VideoCard from "@/components/organisms/VideoCard/Index";
 import { VideoIcon, UserPlus, Users } from "lucide-react";
 import Link from "next/link";
 

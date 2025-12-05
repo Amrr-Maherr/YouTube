@@ -1,5 +1,5 @@
 "use client";
-import { Switch } from "@/components/ui/switch";
+import { Switch } from "@/components/atoms/ui/switch";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 function ThemeButton() {

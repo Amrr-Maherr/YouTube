@@ -1,7 +1,7 @@
 // src/components/Settings/SettingsCard.jsx
 "use client";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { Switch } from "@/components/ui/switch";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/atoms/ui/card";
+import { Switch } from "@/components/atoms/ui/switch";
 import ThemeButton from "./ThemeButton";
 
 export default function SettingsCard({

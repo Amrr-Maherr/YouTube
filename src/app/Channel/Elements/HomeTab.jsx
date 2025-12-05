@@ -1,9 +1,9 @@
 "use client";
 
-import VideoCard from "@/components/VideoCard/Index";
+import VideoCard from "@/components/organisms/VideoCard/Index";
 import PlaylistVideoCard from "./PlaylistVideoCard";
-import VideoDetailsCard from "@/app/VideoDetails/Elements/VideoDetailsCard";
-import VideoThumbnail from "@/app/SearchResult/Elements/VideoThumbnail";
+import VideoDetailsCard from "../Elements/VideoDetailsCard";
+import VideoThumbnail from "../Elements/VideoThumbnail";
 
 export default function HomeTab({
   ChannelVideos,

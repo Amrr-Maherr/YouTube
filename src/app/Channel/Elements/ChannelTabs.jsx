@@ -1,6 +1,6 @@
 "use client";
 
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/atoms/ui/tabs";
 import ChannelPlayLists from "./ChannelPlayLists";
 import ChannelVideosSection from "./ChannelVideosSection";
 import ChannelDescriptionComponent from "./ChannelDescriptionComponent";
