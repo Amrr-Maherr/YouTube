@@ -1,10 +1,10 @@
 "use client";
-import VideoDetailsSkeleton from "@/components/LoadingSkeleton/VideoDetailsSkeleton";
+import VideoDetailsSkeleton from "@/components/organisms/LoadingSkeleton/VideoDetailsSkeleton";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import VideoDetailsCard from "../Elements/VideoDetailsCard";
 import VideoComments from "../Comments/VideoComments";
-import VideoCard from "../../../components/VideoCard/Index";
+import VideoCard from "@/components/organisms/VideoCard/Index";
 import useVideoTitle from "@/hooks/useVideoTitle";
 import { useVideoDetails } from "@/hooks/useVideoDetails";
 import { useChannelDetails } from "@/hooks/useChannelDetails";

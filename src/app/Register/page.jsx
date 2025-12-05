@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Eye, EyeOff, ChevronLeft, CheckCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
-import GoogleLoginButton from "@/components/ui/GoogleLoginButton";
+import GoogleLoginButton from "@/components/atoms/ui/GoogleLoginButton";
 
 function Register() {
   const [showPassword, setShowPassword] = useState(false);

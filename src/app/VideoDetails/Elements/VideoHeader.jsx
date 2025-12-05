@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/atoms/ui/button";
 import ChannelAvatar from "./ChannelAvatar";
 
 function VideoHeader({ title, channelTitle, ChannelDetails, viewCount }) {

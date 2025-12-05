@@ -2,7 +2,7 @@
 import { useSearchParams } from "next/navigation";
 import { useSearchVideos } from "@/hooks/useSearchVideos";
 import SearchResultCard from "./Elements/SearchResultCard";
-import SearchResultCardLoader from "@/components/LoadingSkeleton/SearchResultCardLoader";
+import SearchResultCardLoader from "@/components/organisms/LoadingSkeleton/SearchResultCardLoader";
 
 function SearchResultClient() {
   const searchParams = useSearchParams();

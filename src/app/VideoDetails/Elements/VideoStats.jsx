@@ -1,5 +1,5 @@
 "use client";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/atoms/ui/button";
 import { ThumbsUp, ThumbsDown, Share2, Bookmark } from "lucide-react";
 
 function VideoStats({ viewCount, likeCount, commentCount }) {

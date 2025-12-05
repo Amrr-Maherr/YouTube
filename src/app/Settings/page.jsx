@@ -1,6 +1,6 @@
 // src/app/settings/page.jsx (أو src/pages/SettingsPage.jsx)
 "use client";
-import Navbar from "@/components/Navbar/Navbar";
+import Navbar from "@/components/organisms/Navbar/Navbar";
 import {
   User,
   Lock,

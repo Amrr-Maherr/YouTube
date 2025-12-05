@@ -1,9 +1,9 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import GoogleLoginButton from "@/components/ui/GoogleLoginButton";
+import { Card, CardContent } from "@/components/atoms/ui/card";
+import { Button } from "@/components/atoms/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/atoms/ui/avatar";
+import GoogleLoginButton from "@/components/atoms/ui/GoogleLoginButton";
 
 export default function Profile() {
   const [user, setUser] = useState(null);

@@ -1,5 +1,5 @@
 "use client";
-import { Card } from "@/components/ui/card";
+import { Card } from "@/components/atoms/ui/card";
 import VideoDescription from "./VideoDescription";
 import VideoStats from "./VideoStats";
 import VideoHeader from "./VideoHeader";
