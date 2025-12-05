@@ -11,26 +11,30 @@ function VideoActions({ video }) {
 
   const [showActions, setShowActions] = useState(false);
 
-  // Extract video ID
-  const videoId = video.id?.videoId || video.id;
+  // Extract video ID with fallback for different data structures
+  const videoId = video.id?.videoId ||
+                 video.id ||
+                 video.videoId ||
+                 video.snippet?.resourceId?.videoId;
 
-  // Extract channel info
+  // Extract channel info with fallbacks
   const channelData = {
-    id: video.snippet?.channelId,
-    title: video.snippet?.channelTitle,
-    thumbnail: video.snippet?.thumbnails?.default?.url
+    id: video.snippet?.channelId || video.channelId,
+    title: video.snippet?.channelTitle || video.channelTitle,
+    thumbnail: video.snippet?.thumbnails?.default?.url || video.thumbnail
   };
 
   const handleLike = (e) => {
     e.preventDefault();
     e.stopPropagation();
 
+    // Use existing data or build from video object
     const videoData = {
       id: videoId,
-      title: video.snippet?.title,
-      thumbnail: video.snippet?.thumbnails?.default?.url,
-      channelTitle: video.snippet?.channelTitle,
-      publishedAt: video.snippet?.publishedAt
+      title: video.title || video.snippet?.title || 'Untitled Video',
+      thumbnail: video.thumbnail || video.snippet?.thumbnails?.default?.url,
+      channelTitle: video.channelTitle || video.snippet?.channelTitle || 'Unknown Channel',
+      publishedAt: video.publishedAt || video.snippet?.publishedAt
     };
 
     if (isLiked(videoId)) {
@@ -44,11 +48,12 @@ function VideoActions({ video }) {
     e.preventDefault();
     e.stopPropagation();
 
+    // Use existing data or build from video object
     const videoData = {
       id: videoId,
-      title: video.snippet?.title,
-      thumbnail: video.snippet?.thumbnails?.default?.url,
-      channelTitle: video.snippet?.channelTitle,
+      title: video.title || video.snippet?.title || 'Untitled Video',
+      thumbnail: video.thumbnail || video.snippet?.thumbnails?.default?.url,
+      channelTitle: video.channelTitle || video.snippet?.channelTitle || 'Unknown Channel',
       savedAt: Date.now()
     };
 
