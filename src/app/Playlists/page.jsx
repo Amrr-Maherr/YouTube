@@ -1,6 +1,6 @@
 "use client";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
-import VideoCard from "@/components/VideoCard/Index";
+import VideoCard from "@/components/organisms/VideoCard/Index";
 import { Library, Plus, PlayCircle, Trash2, Edit } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";

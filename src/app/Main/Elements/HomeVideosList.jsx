@@ -1,7 +1,7 @@
 "use client";
 import { useMostPopularVideos } from "@/hooks/useMostPopularVideos";
-import VideoCard from "../../../components/VideoCard/Index";
-import { VideoSkeletonList } from "@/components/LoadingSkeleton/VideoSkeleton";
+import VideoCard from "../../../components/organisms/VideoCard/Index";
+import { VideoSkeletonList } from "@/components/organisms/LoadingSkeleton/VideoSkeleton";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 function HomeVideosList() {

@@ -1,5 +1,5 @@
 import { memo } from "react";
-import VideoCard from "../../../components/VideoCard/Index";
+import VideoCard from "../../../components/organisms/VideoCard/Index";
 
 function ChannelVideosSection({ ChannelVideos }) {
   if (!ChannelVideos || ChannelVideos.length === 0) return null;

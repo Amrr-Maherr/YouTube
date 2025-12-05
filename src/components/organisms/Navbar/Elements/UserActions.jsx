@@ -1,12 +1,12 @@
 "use client"
 import { Bell } from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/atoms/ui/avatar";
 import { Plus } from "lucide-react";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
+} from "@/components/atoms/ui/tooltip";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 const UserActions = () => {

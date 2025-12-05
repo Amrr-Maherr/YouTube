@@ -1,5 +1,5 @@
 "use client";
-import Slider from "@/components/Slider/Slider";
+import Slider from "@/components/organisms/Slider/Slider";
 import { useCategories } from "@/hooks/useCategories";
 
 function CategoriesNav() {

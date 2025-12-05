@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { Search, X } from "lucide-react";
-import { Input } from "@/components/ui/input";
+import { Input } from "@/components/atoms/ui/input";
 import { useSearchVideos } from "@/hooks/useSearchVideos";
 import SearchResultMenu from "./SearchResultMenu";
 import Link from "next/link";
