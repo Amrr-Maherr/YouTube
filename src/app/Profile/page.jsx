@@ -4,13 +4,10 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import GoogleLoginButton from "@/components/ui/GoogleLoginButton";
-import { useDispatch } from "react-redux";
-import { logOut, setUserData } from "@/Store/userInfoSlice";
 
 export default function Profile() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const dispatch = useDispatch()
 
   useEffect(() => {
     const saved = localStorage.getItem("user");
@@ -43,7 +40,7 @@ export default function Profile() {
       console.log("User Info:", userInfo);
       setUser(userInfo);
       if (userInfo) {
-        dispatch(setUserData(userInfo));
+        localStorage.setItem("user", JSON.stringify(userInfo));
       }
     } catch (error) {
       console.error("Error fetching user info:", error);
@@ -52,7 +49,7 @@ export default function Profile() {
 
   const handleLogout = () => {
     setUser(null);
-    dispatch(logOut());
+    localStorage.removeItem("user");
   };
 
   if (loading) {

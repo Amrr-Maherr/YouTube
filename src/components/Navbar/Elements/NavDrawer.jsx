@@ -26,21 +26,15 @@ import Logo from "./Logo";
 export default function NavDrawer() {
   const navItems = [
     { icon: Home, label: "Home", href: "/" },
-    { icon: Compass, label: "Explore", href: "/explore" },
-    { icon: Video, label: "Subscriptions", href: "/subscriptions" },
-    { icon: Clock, label: "History", href: "/history" },
+    { icon: Video, label: "Subscriptions", href: "/Subscriptions" },
+    { icon: Clock, label: "History", href: "/History" },
+    { icon: Flame, label: "Trending", href: "/Trending" },
   ];
 
   const libraryItems = [
-    { icon: Library, label: "Library", href: "/library" },
-    { icon: Heart, label: "Liked videos", href: "/liked" },
-    { icon: Clock3, label: "Watch later", href: "/watch-later" },
-  ];
-
-  const exploreItems = [
-    { icon: Flame, label: "Trending", href: "/trending" },
-    { icon: Music, label: "Music", href: "/music" },
-    { icon: Gamepad2, label: "Gaming", href: "/gaming" },
+    { icon: Library, label: "Library", href: "/Playlists" },
+    { icon: Heart, label: "Liked videos", href: "/LikedVideos" },
+    { icon: Clock3, label: "Watch later", href: "/WatchLater" },
   ];
 
   return (
@@ -95,23 +89,7 @@ export default function NavDrawer() {
           })}
         </nav>
 
-        <div className="my-3 border-t border-[#303030]" />
 
-        <nav className="flex flex-col">
-          {exploreItems.map((item, index) => {
-            const Icon = item.icon;
-            return (
-              <Link
-                key={index}
-                href={item.href}
-                className="flex items-center gap-6 px-4 py-2 rounded-lg hover:bg-[var(--background)] text-sm"
-              >
-                <Icon size={22} />
-                <span>{item.label}</span>
-              </Link>
-            );
-          })}
-        </nav>
 
         <div className="my-3 border-t border-[#303030]" />
         {/* Divider before Profile */}

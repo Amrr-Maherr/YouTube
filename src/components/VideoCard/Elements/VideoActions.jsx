@@ -1,10 +1,134 @@
 // src/components/Video/VideoActions.jsx
-import { EllipsisVertical } from "lucide-react";
+import { Clock3, Heart, Share2, UserPlus } from "lucide-react";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
+import { useState } from "react";
 
-function VideoActions() {
+function VideoActions({ video }) {
+  const [likedVideos, , { addItem: addToLiked, removeItem: removeFromLiked, isInStorage: isLiked }] = useLocalStorage("likedVideos", []);
+  const [watchLater, , { addItem: addToWatchLater, removeItem: removeFromWatchLater, isInStorage: isInWatchLater }] = useLocalStorage("watchLater", []);
+  const [subscriptions, , { addItem: addToSubscriptions }] = useLocalStorage("subscriptions", []);
+  const [watchHistory, setWatchHistory] = useLocalStorage("watchHistory", []);
+
+  const [showActions, setShowActions] = useState(false);
+
+  // Extract video ID
+  const videoId = video.id?.videoId || video.id;
+
+  // Extract channel info
+  const channelData = {
+    id: video.snippet?.channelId,
+    title: video.snippet?.channelTitle,
+    thumbnail: video.snippet?.thumbnails?.default?.url
+  };
+
+  const handleLike = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const videoData = {
+      id: videoId,
+      title: video.snippet?.title,
+      thumbnail: video.snippet?.thumbnails?.default?.url,
+      channelTitle: video.snippet?.channelTitle,
+      publishedAt: video.snippet?.publishedAt
+    };
+
+    if (isLiked(videoId)) {
+      removeFromLiked(videoId);
+    } else {
+      addToLiked(videoData);
+    }
+  };
+
+  const handleWatchLater = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const videoData = {
+      id: videoId,
+      title: video.snippet?.title,
+      thumbnail: video.snippet?.thumbnails?.default?.url,
+      channelTitle: video.snippet?.channelTitle,
+      savedAt: Date.now()
+    };
+
+    if (isInWatchLater(videoId)) {
+      removeFromWatchLater(videoId);
+    } else {
+      addToWatchLater(videoData);
+    }
+  };
+
+  const handleSubscribe = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    addToSubscriptions({
+      ...channelData,
+      subscribedAt: Date.now()
+    });
+  };
+
+  const handleWatch = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const watchData = {
+      id: videoId,
+      title: video.snippet?.title,
+      thumbnail: video.snippet?.thumbnails?.default?.url,
+      channelTitle: video.snippet?.channelTitle,
+      watchedAt: Date.now()
+    };
+
+    // Add to history
+    const existingIndex = watchHistory.findIndex(v => v.id === videoId);
+    if (existingIndex === -1) {
+      setWatchHistory([watchData, ...watchHistory]);
+    }
+  };
+
   return (
-    <div className="hover:bg-[var(--background)] rounded-full w-[36px] h-[36px] flex items-center justify-center">
-      <EllipsisVertical className="text-[var(--foreground)]" />
+    <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+      {/* Main actions menu */}
+      <div className="flex gap-1">
+        {/* Watch Later Button */}
+        <button
+          onClick={handleWatchLater}
+          className={`p-2 rounded-full transition-colors ${
+            isInWatchLater(videoId)
+              ? 'bg-green-600 hover:bg-green-700'
+              : 'bg-black bg-opacity-70 hover:bg-opacity-90'
+          }`}
+          title={isInWatchLater(videoId) ? "Remove from Watch Later" : "Add to Watch Later"}
+        >
+          <Clock3 className="w-4 h-4 text-white" />
+        </button>
+
+        {/* Like Button */}
+        <button
+          onClick={handleLike}
+          className={`p-2 rounded-full transition-colors ${
+            isLiked(videoId)
+              ? 'bg-red-600 hover:bg-red-700'
+              : 'bg-black bg-opacity-70 hover:bg-opacity-90'
+          }`}
+          title={isLiked(videoId) ? "Unlike" : "Like"}
+        >
+          <Heart className={`w-4 h-4 ${isLiked(videoId) ? 'text-white fill-current' : 'text-white'}`} />
+        </button>
+
+        {/* Subscribe Button - Only if not already subscribed */}
+        {!subscriptions.some(s => s.id === channelData.id) && (
+          <button
+            onClick={handleSubscribe}
+            className="p-2 bg-black bg-opacity-70 hover:bg-opacity-90 rounded-full transition-colors"
+            title="Subscribe to channel"
+          >
+            <UserPlus className="w-4 h-4 text-white" />
+          </button>
+        )}
+      </div>
     </div>
   );
 }
