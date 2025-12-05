@@ -1,3 +1,4 @@
+"use client";
 import {
   Sheet,
   SheetContent,
@@ -19,23 +20,42 @@ import {
   Gamepad2,
   Settings,
   User,
+  LogIn,
+  LogOut,
 } from "lucide-react";
 import Link from "next/link";
 import Logo from "./Logo";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
+import { useRouter } from "next/navigation";
 
 export default function NavDrawer() {
+  const [user] = useLocalStorage("user", null);
+  const router = useRouter();
+
   const navItems = [
     { icon: Home, label: "Home", href: "/" },
-    { icon: Video, label: "Subscriptions", href: "/Subscriptions" },
-    { icon: Clock, label: "History", href: "/History" },
+    { icon: Video, label: "Subscriptions", href: "/Subscriptions", auth: true },
+    { icon: Clock, label: "History", href: "/History", auth: true },
     { icon: Flame, label: "Trending", href: "/Trending" },
   ];
 
   const libraryItems = [
-    { icon: Library, label: "Library", href: "/Playlists" },
-    { icon: Heart, label: "Liked videos", href: "/LikedVideos" },
-    { icon: Clock3, label: "Watch later", href: "/WatchLater" },
+    { icon: Library, label: "Library", href: "/Playlists", auth: true },
+    { icon: Heart, label: "Liked videos", href: "/LikedVideos", auth: true },
+    { icon: Clock3, label: "Watch later", href: "/WatchLater", auth: true },
   ];
+
+  const authActions = user ? [
+    { icon: LogOut, label: "Sign out", action: handleLogout },
+  ] : [
+    { icon: LogIn, label: "Sign in", href: "/Login" },
+    { icon: User, label: "Create account", href: "/Register" },
+  ];
+
+  function handleLogout() {
+    localStorage.removeItem("user");
+    router.push("/");
+  }
 
   return (
     <Sheet>
